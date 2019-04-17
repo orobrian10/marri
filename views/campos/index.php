@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             'nom_campos',
-            'loc_campos',
+            'localidades.nom_loc',
             'hec_tot_campos',
             'hec_sem_campos',
             ['class' => 'yii\grid\ActionColumn'],

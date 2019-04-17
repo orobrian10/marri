@@ -39,9 +39,12 @@ class CamposSearch extends Campos
      *
      * @return ActiveDataProvider
      */
+    public $localidades;
+
     public function search($params)
     {
         $query = Campos::find();
+        $query->leftJoin('localidades','localidades.id_loc = campos.loc_campos');
 
         // add conditions that should always apply here
 
