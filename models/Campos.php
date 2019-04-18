@@ -59,8 +59,8 @@ class Campos extends \yii\db\ActiveRecord
         return new CamposQuery(get_called_class());
     }
 
-    public function getLocalidad()
+    public function getlocalidades()
     {
-        return $this->hasMany(Localidades::className(), ['id_loc' => 'loc_campos']);
+        return $this->hasOne(Localidades::className(), ['id_loc' => 'loc_campos']);
     }
 }

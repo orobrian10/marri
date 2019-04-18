@@ -4,22 +4,21 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Campos;
+use app\models\Localidades;
 
 /**
- * CamposSearch represents the model behind the search form of `app\models\Campos`.
+ * LocalidadesSearch represents the model behind the search form of `app\models\Localidades`.
  */
-class CamposSearch extends Campos
+class LocalidadesSearch extends Localidades
 {
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'hec_tot_campos', 'hec_sem_campos'], 'integer'],
-            [['nom_campos', 'loc_campos'], 'safe'],
+            [['id_loc'], 'integer'],
+            [['nom_loc'], 'safe'],
         ];
     }
 
@@ -39,16 +38,11 @@ class CamposSearch extends Campos
      *
      * @return ActiveDataProvider
      */
-
     public function search($params)
     {
-        $query = Campos::find()->joinWith('localidades');
-
-        //$query->leftJoin('localidades','localidades.id_loc = campos.loc_campos');
+        $query = Localidades::find();
 
         // add conditions that should always apply here
-
-//        $query->join(['JOIN', 'localidades', 'loc_campos = id_loc']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -64,13 +58,10 @@ class CamposSearch extends Campos
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'hec_tot_campos' => $this->hec_tot_campos,
-            'hec_sem_campos' => $this->hec_sem_campos,
-            'loc_campos' => $this->loc_campos
+            'id_loc' => $this->id_loc,
         ]);
 
-        $query->andFilterWhere(['like', 'nom_campos', $this->nom_campos]);
+        $query->andFilterWhere(['like', 'nom_loc', $this->nom_loc]);
 
         return $dataProvider;
     }

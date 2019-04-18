@@ -4,16 +4,15 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
-use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\CamposSearch */
+/* @var $searchModel app\models\AcopiosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Campos');
+$this->title = Yii::t('app', 'Acopios');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="campos-index">
+<div class="acopios-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -27,22 +26,34 @@ $this->params['breadcrumbs'][] = $this->title;
         'headerRowOptions' => ['class' => 'custom-grid-header'],
         'rowOptions' => ['class' => 'custom-grid-row'],
         'columns' => [
-            'nom_campos',
+            'nom_aco',
             [
-                'attribute' => 'loc_campos',
-                'value' => 'localidades.nom_loc',
-                'filter' => ArrayHelper::map(\app\models\Localidades::find()->all(), 'id_loc', 'nom_loc'),
+                'attribute' => 'ubi_aco',
+                'value' => 'lugares.nom_lug'
+            ],
+            'cer_aco',
+            'lot_aco',
+            [
+                'attribute' => 'sil_aco',
+                'value' => function ($model) {
+                    if ($model->sil_aco == '1'):
+                        return 'Silos Bolsa';
+                    elseif ($model->sil_aco):
+                        return 'Silos Propio';
+                    else:
+                        return '';
+                    endif;
+                },
+                'filter' => ['1' => 'Silo en bolsa', '2' => 'Silo Propio'],
                 'filterType' => GridView::FILTER_SELECT2,
                 'filterWidgetOptions' => [
                     'options' => ['prompt' => ''],
                     'pluginOptions' => [
                         'allowClear' => true,
-                        'width' => '250px'
+                        'width'=>'250px'
                     ],
                 ],
             ],
-            'hec_tot_campos',
-            'hec_sem_campos',
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [
@@ -53,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'toolbar' => [
             ['content' =>
-                '<div>' . Html::a('Nuevo Campo', Url::to(['create']), ['class' => 'btn btn-sm btn-success btn-gridview-menu']) . '</div>'
+                '<div>' . Html::a('Nuevo Acopio', Url::to(['create']), ['class' => 'btn btn-sm btn-success btn-gridview-menu']) . '</div>'
             ],
         ],
         'pjax' => true,

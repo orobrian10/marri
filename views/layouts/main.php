@@ -31,17 +31,10 @@ AppAsset::register($this);
     <div class="logo-container nav-bar-container ">
         <div class="container">
             <div class="row">
-                <div class="col-xs-3 col-sm-3">
-                    <img class="logo-argentina img-responsive" src="<?= Yii::getAlias('@web') ?>/img/Logo_Argentina.png"
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <img class="img-responsive" src="<?= Yii::getAlias('@web') ?>/img/Logo_Argentina.png"
                          alt="Argentina">
-                </div>
-                <div class="col-xs-3 col-sm-5 col-no-padding">
-                    <img class="logo-campus img-responsive" src="<?= Yii::getAlias('@web') ?>/img/Logo_CampusGlobal.png"
-                         alt="Campus Global">
-                </div>
-                <div class="col-xs-6 col-sm-4">
-                    <img class="logo-educacion img-responsive"
-                         src="<?= Yii::getAlias('@web') ?>/img/Logo_CampusGlobal.png" alt="Presidencia">
                 </div>
             </div>
         </div>
@@ -56,42 +49,41 @@ AppAsset::register($this);
             'options' => ['class' => 'showLoading']
         ],
         [
-            'label' => 'Quiénes somos',
-            'url' => ['/site/quienessomos'],
+            'label' => 'Campos',
+            'items' => [
+                [
+                    'label' => 'Listado',
+                    'url' => ['/campos/index'],
+                    'options' => ['class' => 'showLoading']
+                ]
+            ]
+        ],
+        [
+            'label' => 'Acopios',
+            'items' => [
+                [
+                    'label' => 'Listado',
+                    'url' => ['/acopios/index'],
+                    'options' => ['class' => 'showLoading']
+                ],
+                [
+                    'label' => 'Lugares',
+                    'url' => ['/acopios-lugares/index'],
+                    'options' => ['class' => 'showLoading']
+                ],
+            ],
+        ],
+        [
+            'label' => 'Localidades',
+            'url' => ['/localidades/index'],
             'options' => ['class' => 'showLoading']
         ],
         [
-            'label' => 'Buscá tu beca',
-            'items' => [
-                [
-                    'label' => 'Becas en el extranjero',
-                    'url' => ['/becas/enextranjero'],
-                    'options' => ['class' => 'showLoading']
-                ],
-            ],
-        ],
-        [
-            'label' => 'Servicios',
-            'items' => [
-                [
-                    'label' => 'Apostillar documentos',
-                    'url' => ['/site/apostillardocumentos'],
-                    'options' => ['class' => 'showLoading']
-                ],
-                [
-                    'label' => 'Obtener visa de estudios',
-                    'url' => ['/site/obtenervisadeestudios'],
-                    'options' => ['class' => 'showLoading']
-                ],
-                [
-                    'label' => 'Tramitar reconocimiento de estudios',
-                    'url' => ['/site/tramitarreconocimientodeestudios'],
-                    'options' => ['class' => 'showLoading']
-                ],
-            ],
+            'label' => 'Proveedores',
+            'url' => ['/proveedores/index'],
+            'options' => ['class' => 'showLoading']
         ],
     ];
-
 
 
     NavBar::begin([

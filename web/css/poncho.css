@@ -525,7 +525,7 @@ h6, .h6 {
     font-size: 0.8em; }
 
 a {
-  color: #0072bc;
+  color: #000;
   font-weight: 500; }
   §
   a:hover, a:focus, a:active {
@@ -685,7 +685,7 @@ article h1.icon {
 
 .open > .dropdown-toggle.btn-inverse {
   background-color: #fff;
-  color: #0072bc; }
+  color: #000; }
 
 .btn-default.disabled,
 .btn-default[disabled],
@@ -746,7 +746,7 @@ fieldset[disabled] .btn-default.active {
   padding: 24px 96px; }
 
 .social-btn a {
-  color: #0072bc; }
+  color: #000; }
 
 .form-tramite .btn {
   height: 49px; }
@@ -805,7 +805,7 @@ span.btn:hover {
     padding: 12px 15px; }
   .dropdown-menu li a:not(.btn):hover,
   .dropdown-menu li a:not(.btn):focus {
-    background-color: #0072bc;
+    background-color: #000;
     color: white; }
   .dropdown-menu li:first-of-type a {
     border-radius: 4px 4px 0 0; }
@@ -860,7 +860,7 @@ span.btn:hover {
       .navbar .navbar-brand h1.brand-2-h1 {
         color: #767676; }
         .navbar .navbar-brand h1.brand-2-h1 strong {
-          color: #0072bc; }
+          color: #000; }
     .navbar .navbar-brand.solo h1 {
       margin-top: .7em; }
   .navbar a.navbar-brand:hover h1 {
@@ -887,7 +887,7 @@ header .btn-group > .btn:first-child {
 .navbar-brand-2 h1 {
   color: #767676; }
   .navbar-brand-2 h1 strong {
-    color: #0072bc; }
+    color: #000; }
 
 .navbar-toggle {
   float: left;

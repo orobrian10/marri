@@ -313,7 +313,7 @@ h4 {
 .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus,
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
     background: transparent;
-    color: #00aae5;
+    color: #038002;
 }
 
 /* Form */
@@ -1687,7 +1687,7 @@ form div.required.has-error label.control-label:after {
     display: inline-block;   
 }
 .ico-svg-navbar:hover .cls-1 {
-    fill: #00aae5;
+    fill: #038002;
 }
 .form-busqueda-filtros {
     margin-bottom: 5px;
@@ -2001,7 +2001,7 @@ form div.required.has-error label.control-label:after {
 }*/
 
 .btn-toolbar.kv-grid-toolbar {
-    margin-top: 5px;
+    margin: 5px;
 }
 
 .custom-grid .kv-panel-before {
@@ -2033,7 +2033,7 @@ form div.required.has-error label.control-label:after {
 .fa-arrow-up,
 .fa-pencil,
 .fa-eye {
-    color: #0072bc;
+    color: #000;
 }
 .fa-check {
     color: #52bd75  ;

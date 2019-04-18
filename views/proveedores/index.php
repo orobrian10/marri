@@ -7,13 +7,13 @@ use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\CamposSearch */
+/* @var $searchModel app\models\ProveedoresSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Campos');
+$this->title = Yii::t('app', 'Proveedores');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="campos-index">
+<div class="proveedores-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -27,22 +27,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'headerRowOptions' => ['class' => 'custom-grid-header'],
         'rowOptions' => ['class' => 'custom-grid-row'],
         'columns' => [
-            'nom_campos',
+            'nom_pro',
+            'tel_pro',
             [
-                'attribute' => 'loc_campos',
+                'attribute' => 'loc_pro',
                 'value' => 'localidades.nom_loc',
-                'filter' => ArrayHelper::map(\app\models\Localidades::find()->all(), 'id_loc', 'nom_loc'),
+                'filter' => ArrayHelper::map(\app\models\Localidades::find()->all(),'id_loc','nom_loc'),
                 'filterType' => GridView::FILTER_SELECT2,
                 'filterWidgetOptions' => [
                     'options' => ['prompt' => ''],
                     'pluginOptions' => [
                         'allowClear' => true,
-                        'width' => '250px'
+                        'width'=>'auto'
                     ],
                 ],
             ],
-            'hec_tot_campos',
-            'hec_sem_campos',
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [
@@ -53,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'toolbar' => [
             ['content' =>
-                '<div>' . Html::a('Nuevo Campo', Url::to(['create']), ['class' => 'btn btn-sm btn-success btn-gridview-menu']) . '</div>'
+                '<div>' . Html::a('Nuevo Proveedor', Url::to(['create']), ['class' => 'btn btn-sm btn-success btn-gridview-menu']) . '</div>'
             ],
         ],
         'pjax' => true,

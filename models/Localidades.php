@@ -38,7 +38,7 @@ class Localidades extends \yii\db\ActiveRecord
     {
         return [
             'id_loc' => Yii::t('app', 'Id Loc'),
-            'nom_loc' => Yii::t('app', 'Nom Loc'),
+            'nom_loc' => Yii::t('app', 'Localidad'),
         ];
     }
 

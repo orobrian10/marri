@@ -4,16 +4,14 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
-use yii\helpers\ArrayHelper;
-
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\CamposSearch */
+/* @var $searchModel app\models\AcopiosLugaresSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Campos');
+$this->title = Yii::t('app', 'Acopios Lugares');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="campos-index">
+<div class="acopios-lugares-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -27,22 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'headerRowOptions' => ['class' => 'custom-grid-header'],
         'rowOptions' => ['class' => 'custom-grid-row'],
         'columns' => [
-            'nom_campos',
-            [
-                'attribute' => 'loc_campos',
-                'value' => 'localidades.nom_loc',
-                'filter' => ArrayHelper::map(\app\models\Localidades::find()->all(), 'id_loc', 'nom_loc'),
-                'filterType' => GridView::FILTER_SELECT2,
-                'filterWidgetOptions' => [
-                    'options' => ['prompt' => ''],
-                    'pluginOptions' => [
-                        'allowClear' => true,
-                        'width' => '250px'
-                    ],
-                ],
-            ],
-            'hec_tot_campos',
-            'hec_sem_campos',
+            'nom_lug',
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [
@@ -52,11 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'footer' => '',
         ],
         'toolbar' => [
-            ['content' =>
-                '<div>' . Html::a('Nuevo Campo', Url::to(['create']), ['class' => 'btn btn-sm btn-success btn-gridview-menu']) . '</div>'
+            ['content'=>
+                '<div>'. Html::a('Nuevo Lugar de Acopio', Url::to(['create']), ['class' => 'btn btn-sm btn-success btn-gridview-menu']) .'</div>'
             ],
         ],
-        'pjax' => true,
+        'pjax'=>true,
         'responsive' => true,
         'floatHeader' => false,
 
