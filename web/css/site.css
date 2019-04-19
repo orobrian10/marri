@@ -3259,6 +3259,11 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     border: 1px solid #46a948 !important;
 }
 
+.panel-heading {
+    color: white !important;
+}
+
+
 .panel {
     font-size: 13px !important;
 }
@@ -3288,4 +3293,10 @@ footer {
 
 body {
     font-size: 14px !important;
+}
+
+
+.select2-container--krajee .select2-selection--single .select2-selection__clear {
+    right: 20px !important;
+    font-size: 16px !important;
 }

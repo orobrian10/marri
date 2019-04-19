@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cereales-index">
 
-    <?php Pjax::begin(); ?>
+    <?php Pjax::begin(['enablePushState' => false]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

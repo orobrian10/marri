@@ -50,13 +50,8 @@ AppAsset::register($this);
         ],
         [
             'label' => 'Campos',
-            'items' => [
-                [
-                    'label' => 'Listado',
-                    'url' => ['/campos/index'],
-                    'options' => ['class' => 'showLoading']
-                ]
-            ]
+            'url' => ['/campos/index'],
+            'options' => ['class' => 'showLoading']
         ],
         [
             'label' => 'Cereales',

@@ -1,0 +1,21 @@
+Ingresar cereal:
+- Codigo de ingreso
+- Cereal (ABM)
+- Variedad del cereal
+- Cosecha
+- Fecha de cosecha
+- Cantidad (en quintales)
+- Origen del ceral - Pueden ser CAMPOS o ACOPIO - sacar de ABM
+- Destino del cereal - Pueden ser CAMPOS o ACOPIO - sacar de ABM
+Resultado: Se ingresaron cantidad kg de cereal en destino tal provenientes del campo.
+
+Retirar cereal:
+- Codigo de retiro
+- N carta de porte
+- Cereal (ABM)
+- Variedad del cereal
+- Cosecha
+- Fecha de cosecha
+- Cantidad (qq) a retirar
+- Origen del cereal - Acopio o Campo (ABM)
+- Destino del Cereal - Campo o acopio
