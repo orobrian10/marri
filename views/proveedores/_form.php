@@ -21,7 +21,7 @@ use yii\helpers\ArrayHelper;
     <?=  $form->field($model, 'loc_pro')->dropDownList($var, ['prompt' => 'Seleccione Uno' ]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
