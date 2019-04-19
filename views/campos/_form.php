@@ -14,19 +14,27 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nom_campos')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $form->field($model, 'nom_campos')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?php $var = ArrayHelper::map($localidades,'id_loc','nom_loc'); ?>
+        <div class="col-lg-3">
+            <?php $var = ArrayHelper::map($localidades, 'id_loc', 'nom_loc'); ?>
+            <?= $form->field($model, 'loc_campos')->dropDownList($var, ['prompt' => 'Seleccione Uno']); ?>
+        </div>
 
-    <?=  $form->field($model, 'loc_campos')->dropDownList($var, ['prompt' => 'Seleccione Uno' ]); ?>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'hec_tot_campos')->textInput() ?>
+        </div>
 
+        <div class="col-lg-3">
+            <?= $form->field($model, 'hec_sem_campos')->textInput() ?>
+        </div>
 
-    <?= $form->field($model, 'hec_tot_campos')->textInput() ?>
-
-    <?= $form->field($model, 'hec_sem_campos')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        <div class="col-lg-12 text-right">
+            <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success btn-sm']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

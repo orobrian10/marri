@@ -15,17 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="proveedores-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'options' => ['class' => 'custom-grid'],
-        'headerRowOptions' => ['class' => 'custom-grid-header'],
-        'rowOptions' => ['class' => 'custom-grid-row'],
+    <?= $this->render('/common/_index', [
+        'entity' => 'Proveedores',
+        'entitySing' => 'Proveedor',
+        'controller' => 'acopioslugares',
         'columns' => [
             'nom_pro',
             'tel_pro',
@@ -44,23 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
-        'panel' => [
-            'before' => '',
-            'after' => false,
-            'heading' => false,
-            'footer' => '',
-        ],
-        'toolbar' => [
-            ['content' =>
-                '<div>' . Html::a('Nuevo Proveedor', Url::to(['create']), ['class' => 'btn btn-sm btn-success btn-gridview-menu']) . '</div>'
-            ],
-        ],
-        'pjax' => true,
-        'responsive' => true,
-        'floatHeader' => false,
-
-    ]); ?>
-
-    <?php Pjax::end(); ?>
+        'dataProvider' => $dataProvider,
+        'searchModel' => $searchModel,
+    ]) ?>
 
 </div>

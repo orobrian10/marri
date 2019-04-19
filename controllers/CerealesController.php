@@ -37,6 +37,7 @@ class CerealesController extends Controller
     {
         $searchModel = new CerealesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setPagination(['pageSize' => 10]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

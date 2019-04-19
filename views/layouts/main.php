@@ -59,6 +59,11 @@ AppAsset::register($this);
             ]
         ],
         [
+            'label' => 'Cereales',
+            'url' => ['/cereales/index'],
+            'options' => ['class' => 'showLoading']
+        ],
+        [
             'label' => 'Acopios',
             'items' => [
                 [
@@ -113,9 +118,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <span class="pull-right">Desarrollado por Brian Oroño</span>
     </div>
 </footer>
 
