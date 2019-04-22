@@ -46,14 +46,7 @@ use yii\helpers\ArrayHelper;
 
         <div class="row">
             <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="control-label">Tipo de Orígen</label>
-                    <select id="tip-org" class="form-control 1 2 3">
-                        <option value=""> -</option>
-                        <option value="1">Campo</option>
-                        <option value="2">Acopio</option>
-                    </select>
-                </div>
+                <?= $form->field($model, 'tor_mov')->dropDownList(['' => ' - ', '1' => 'Campo', '2' => 'Acopio'], ['class' => 'form-control 1 2 3']) ?>
             </div>
             <div class="col-lg-6">
                 <?= $form->field($model, 'ori_mov')->dropDownList(['' => ' - '], ['class' => 'form-control 1 2 3']) ?>
@@ -62,14 +55,7 @@ use yii\helpers\ArrayHelper;
 
         <div class="row">
             <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="control-label">Tipo de Destino</label>
-                    <select id="tip-des" class="form-control 1 2 3">
-                        <option value=""> -</option>
-                        <option value="1">Campo</option>
-                        <option value="2">Acopio</option>
-                    </select>
-                </div>
+                <?= $form->field($model, 'tde_mov')->dropDownList(['' => ' - ', '1' => 'Campo', '2' => 'Acopio'], ['class' => 'form-control 1 2 3']) ?>
             </div>
             <div class="col-lg-6">
                 <?= $form->field($model, 'des_mov')->dropDownList(['' => ' - '], ['class' => 'form-control 1 2 3']) ?>
@@ -111,8 +97,8 @@ $script = <<< JS
     }); 
     
     function getUbicaciones(){
-        $('#tip-org').val(1);
-        $('#tip-des').val(1);
+        $('#movimientos-tor_mov').val(1);
+        $('#movimientos-tde_mov').val(1);
         $('#movimientos-ori_mov').html('');
         $('#movimientos-ori_mov').append('<option value=""> - </option>');
         $('#movimientos-des_mov').html('');
@@ -131,8 +117,13 @@ $script = <<< JS
       });
     }
     
-    $('#tip-org').change(function() {
+    $('#movimientos-tor_mov').change(function() {
         var tip = $(this).val();
+        if(!tip){
+            $('#movimientos-ori_mov').html('');
+            $('#movimientos-ori_mov').append('<option value=""> - </option>');
+            return false;
+        }
         $('#movimientos-ori_mov').html('');
         $('#movimientos-ori_mov').append('<option value=""> - </option>');
       $.ajax({
@@ -152,8 +143,13 @@ $script = <<< JS
       });
     });
     
-    $('#tip-des').change(function() {
+    $('#movimientos-tde_mov').change(function() {
         var tip = $(this).val();
+        if(!tip){
+            $('#movimientos-des_mov').html('');
+            $('#movimientos-des_mov').append('<option value=""> - </option>');
+            return false;
+        }
         $('#movimientos-des_mov').html('');
         $('#movimientos-des_mov').append('<option value=""> - </option>');
       $.ajax({

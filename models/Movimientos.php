@@ -37,12 +37,12 @@ class Movimientos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cod_mov', 'fec_cos', 'can_mov', 'ori_mov', 'des_mov', 'cer_mov', 'tip_mov'], 'required'],
+            [['cod_mov', 'fec_cos', 'can_mov', 'ori_mov', 'tor_mov', 'tde_mov', 'des_mov', 'cer_mov', 'tip_mov'], 'required'],
             [['cod_mov', 'cos_mov', 'fec_cos', 'can_mov', 'ori_mov', 'des_mov', 'car_mov', 'cer_mov', 'tip_mov'], 'integer'],
             [['var_mov'], 'string', 'max' => 200],
 
 
-            [['var_mov','cos_mov'], 'required', 'when' => function ($model) {
+            [['var_mov', 'cos_mov'], 'required', 'when' => function ($model) {
                 return $model->tip_mov == 1 || $model->tip_mov == 2;
             }, 'whenClient' => "function (attribute, value) {
                 mov = $('#movimientos-tip_mov').val();
@@ -81,6 +81,8 @@ class Movimientos extends \yii\db\ActiveRecord
             'car_mov' => 'N° carta de porte',
             'cer_mov' => 'Cereral',
             'tip_mov' => 'Tipo de movimiento',
+            'tor_mov' => 'Tipo de Orígen',
+            'tde_mov' => 'Tipo de Destino'
         ];
     }
 
