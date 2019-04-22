@@ -1,6 +1,7 @@
 <?php
 
 use kartik\grid\GridView;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MovimientosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -20,8 +21,30 @@ $this->params['breadcrumbs'][] = $this->title;
             'cos_mov',
             'fec_cos',
             'can_mov',
-            'ori_mov',
-            'des_mov',
+            [
+                'attribute' => 'ori_mov',
+                'value' => function ($model) {
+                    if ($model->tor_mov == 1):
+                        $txt = \app\models\Campos::findOne(['campos.id' => $model->ori_mov]);
+                        return $txt->nom_campos;
+                    else:
+                        $txt = \app\models\Acopios::findOne(['acopios.id_aco' => $model->ori_mov]);
+                        return $txt->nom_aco;
+                    endif;
+                }
+            ],
+            [
+                'attribute' => 'des_mov',
+                'value' => function ($model) {
+                    if ($model->tde_mov == 1):
+                        $txt = \app\models\Campos::findOne(['campos.id' => $model->des_mov]);
+                        return $txt->nom_campos;
+                    else:
+                        $txt = \app\models\Acopios::findOne(['acopios.id_aco' => $model->des_mov]);
+                        return $txt->nom_aco;
+                    endif;
+                }
+            ],
             'car_mov',
             [
                 'attribute' => 'cer_mov',
@@ -44,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'options' => ['prompt' => ''],
                     'pluginOptions' => [
                         'allowClear' => true,
-                        'width'=>'150px'
+                        'width' => '150px'
                     ],
                 ],
             ],

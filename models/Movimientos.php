@@ -37,10 +37,14 @@ class Movimientos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            ['can_mov', 'validarStock'],
             [['cod_mov', 'fec_cos', 'can_mov', 'ori_mov', 'tor_mov', 'tde_mov', 'des_mov', 'cer_mov', 'tip_mov'], 'required'],
-            [['cod_mov', 'cos_mov', 'fec_cos', 'can_mov', 'ori_mov', 'des_mov', 'car_mov', 'cer_mov', 'tip_mov'], 'integer'],
-            [['var_mov'], 'string', 'max' => 200],
+            [['cod_mov', 'can_mov', 'ori_mov', 'des_mov', 'car_mov', 'cer_mov', 'tip_mov'], 'integer'],
 
+            ['fec_cos', 'date', 'format' => 'php:d-m-Y'],
+
+            [['cos_mov'], 'string', 'max' => 300],
+            [['var_mov'], 'string', 'max' => 200],
 
             [['var_mov', 'cos_mov'], 'required', 'when' => function ($model) {
                 return $model->tip_mov == 1 || $model->tip_mov == 2;
@@ -102,4 +106,19 @@ class Movimientos extends \yii\db\ActiveRecord
     {
         return new MovimientosQuery(get_called_class());
     }
+
+    public function validarStock($attribute)
+    {
+        if ($this->ori_mov && $this->can_mov > 0):
+            if ($this->tor_mov == 1):
+                $tot = Campos::findOne(['id' => $this->ori_mov]);
+            else:
+                $tot = Acopios::findOne(['id_aco' => $this->ori_mov]);
+            endif;
+            if ($tot->stock < $this->can_mov):
+                $this->addError($attribute, 'No hay suficiente stock');
+            endif;
+        endif;
+    }
+
 }

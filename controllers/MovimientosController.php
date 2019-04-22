@@ -13,6 +13,7 @@ use yii\filters\AccessRule;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
+use yii\db\Connection;
 
 /**
  * MovimientosController implements the CRUD actions for Movimientos model.
@@ -34,7 +35,7 @@ class MovimientosController extends Controller
                     [
                         'actions' => ['index', 'create', 'update', 'view', 'getcampos', 'delete'],
                         'allow' => true,
-                        'roles' => ['?'],
+                        'roles' => ['@'],
                     ],
                 ],
             ],
@@ -78,7 +79,29 @@ class MovimientosController extends Controller
     {
         $model = new Movimientos();
 
+        $connection = Yii::$app->db;
+        $trans = $connection->beginTransaction();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            try {
+                $stock = $model->can_mov;
+
+                if ($model->tor_mov == 1):
+                    $command = $connection->createCommand('UPDATE campos SET stock=(stock-' . $model->can_mov . ') WHERE id = ' . $model->ori_mov);
+                else:
+                    $command = $connection->createCommand('UPDATE acopios SET stock=(stock-' . $model->can_mov . ') WHERE id_aco = ' . $model->ori_mov);
+                endif;
+                $command->execute();
+
+                $model->save();
+
+                $trans->commit();
+                return $this->redirect(['view', 'id' => $model->id_mov]);
+            } catch (Exception $e) {
+                $trans->rollBack();
+                throw $e;
+            }
+
             return $this->redirect(['view', 'id' => $model->id_mov]);
         }
 

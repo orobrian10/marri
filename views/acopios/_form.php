@@ -18,7 +18,7 @@ use yii\helpers\ArrayHelper;
         </div>
         <div class="col-lg-4">
             <?php $var = ArrayHelper::map($lugares, 'id_lug', 'nom_lug'); ?>
-            <?= $form->field($model, 'ubi_aco')->dropDownList($var, ['prompt' => 'Seleccione Uno']); ?>
+            <?= $form->field($model, 'ubi_aco')->dropDownList($var, ['prompt' => ' - ']); ?>
         </div>
         <div class="col-lg-4">
             <?= $form->field($model, 'cer_aco')->textInput() ?>
@@ -30,8 +30,15 @@ use yii\helpers\ArrayHelper;
 
         <div class="col-lg-4">
             <?php $var = ['1' => 'Silo en bolsa', '2' => 'Silo Propio'] ?>
-            <?= $form->field($model, 'sil_aco')->dropDownList($var, ['prompt' => 'Seleccione Uno']); ?>
+            <?= $form->field($model, 'sil_aco')->dropDownList($var, ['prompt' => ' - ']); ?>
         </div>
+
+        <?php if($model->isNewRecord): ?>
+            <div class="col-lg-4">
+                <?= $form->field($model, 'stock')->textInput() ?>
+            </div>
+        <?php endif; ?>
+
     </div>
 
     <div class="col-lg-12 text-right">

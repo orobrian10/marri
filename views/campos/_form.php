@@ -21,7 +21,7 @@ use yii\helpers\ArrayHelper;
 
         <div class="col-lg-3">
             <?php $var = ArrayHelper::map($localidades, 'id_loc', 'nom_loc'); ?>
-            <?= $form->field($model, 'loc_campos')->dropDownList($var, ['prompt' => 'Seleccione Uno']); ?>
+            <?= $form->field($model, 'loc_campos')->dropDownList($var, ['prompt' => ' - ']); ?>
         </div>
 
         <div class="col-lg-3">
@@ -31,6 +31,13 @@ use yii\helpers\ArrayHelper;
         <div class="col-lg-3">
             <?= $form->field($model, 'hec_sem_campos')->textInput() ?>
         </div>
+
+
+        <?php if($model->isNewRecord): ?>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'stock')->textInput() ?>
+        </div>
+        <?php endif; ?>
 
         <div class="col-lg-12 text-right">
             <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success btn-sm']) ?>

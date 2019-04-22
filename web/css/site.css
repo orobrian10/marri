@@ -3314,3 +3314,7 @@ body {
 .wrap{
     min-height: calc(100% - 28px);
 }
+
+input.krajee-datepicker{
+    height: 34px!important;
+}

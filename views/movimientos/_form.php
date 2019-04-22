@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Cereales;
 use yii\helpers\ArrayHelper;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Movimientos */
@@ -12,7 +13,12 @@ use yii\helpers\ArrayHelper;
 
     <div class="movimientos-form">
 
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin(['id' => 'form-signsup',
+
+            'enableAjaxValidation' => false,
+            'enableClientValidation' => true,
+            //'id' => 'ajax'
+        ]); ?>
 
         <div class="row">
             <div class="col-lg-3">
@@ -34,10 +40,15 @@ use yii\helpers\ArrayHelper;
                 <?= $form->field($model, 'cos_mov')->textInput(['class' => 'form-control 1 2']) ?>
             </div>
             <div class="col-lg-3">
-                <?= $form->field($model, 'fec_cos')->textInput(['class' => 'form-control 1 2 3']) ?>
-            </div>
-            <div class="col-lg-3">
-                <?= $form->field($model, 'can_mov')->textInput(['class' => 'form-control 1 2 3']) ?>
+                <?= $form->field($model, 'fec_cos')->widget(DatePicker::classname(), [
+                    'pluginOptions' => [
+                        'type' => DatePicker::TYPE_INPUT,
+                        'format' => 'dd-mm-yyyy',
+                        'autoclose' => true
+                    ]
+                ]);
+                ?>
+
             </div>
             <div class="col-lg-3">
                 <?= $form->field($model, 'car_mov')->textInput(['class' => 'form-control 2']) ?>
@@ -62,6 +73,12 @@ use yii\helpers\ArrayHelper;
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-lg-3">
+                <?= $form->field($model, 'can_mov')->textInput(['class' => 'form-control 1 2 3']) ?>
+            </div>
+        </div>
+
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success btn-sm 1 2 3']) ?>
         </div>
@@ -71,27 +88,37 @@ use yii\helpers\ArrayHelper;
     </div>
 
 <?php
+
+$tor = ($model->tor_mov) ? $model->tor_mov : 1;
+$tde = ($model->tde_mov) ? $model->tde_mov : 1;
+
+$ori = ($model->ori_mov) ? $model->ori_mov : 0;
+$des = ($model->des_mov) ? $model->des_mov : 0;
+
 $script = <<< JS
-
-    getUbicaciones();
-
-    $('input,select.1,select.2,select.3,button.1').parent('div').hide();
+    
+    $('input.1,input.2,input.3,select.1,select.2,select.3,button.1').parent('div').hide();
+    $('.field-movimientos-fec_cos').hide();
 
     $('#movimientos-tip_mov').change(function() {
       var value = $(this).val();
       if(value == ''){
-          $('input,select.1,select.2,select.3,button.1').parent('div').hide();      
+          $('.field-movimientos-fec_cos').hide();
+          $('input.1,input.2,input.3,select.1,select.2,select.3,button.1').parent('div').hide();
       }
       if(value == 1){
-          $('input,select.1,select.2,select.3').parent('div').hide();
+          $('input.1,input.2,input.3,select.1,select.2,select.3').parent('div').hide();
           $('input.1,select.1,button.1').parent('div').show();
+          $('.field-movimientos-fec_cos').show();
       }
       if(value == 2){
-          $('input,select.1,select.2,select.3').parent('div').hide();
+          $('input.1,input.2,input.3,select.1,select.2,select.3').parent('div').hide();
           $('input.2,select.2,button.1').parent('div').show();
+          $('.field-movimientos-fec_cos').show();
       }
       if(value == 3){
-          $('input,select.1,select.2,select.3').parent('div').hide();
+          $('.field-movimientos-fec_cos').hide();
+          $('input.1,input.2,input.3,select.1,select.2,select.3').parent('div').hide();
           $('input.3,select.3,button.1').parent('div').show();
       }
     }); 
@@ -110,6 +137,14 @@ $script = <<< JS
         dataType:'json',
         success:function(data) {
           $(data).each(function( index,value ) {
+                /*var selectedOri = '';
+                if(value.id == ori){
+                    selectedOri = "selected";
+                }
+                var selectedDes = '';
+                if(value.id == des){
+                    selectedDes = "selected";
+                }*/
                 $('#movimientos-ori_mov').append('<option value="'+value.id+'">'+value.nom_campos+'</option>');
                 $('#movimientos-des_mov').append('<option value="'+value.id+'">'+value.nom_campos+'</option>');
          });
@@ -117,6 +152,56 @@ $script = <<< JS
       });
     }
     
+    function loadUbicaciones(){
+        var tip = $tor;
+        var tip2 = $tde;
+        $.ajax({
+        url:'getcampos',
+        data: {id:tip},
+        type:'post',
+        dataType:'json',
+        success:function(data) {
+          $(data).each(function( index,value ) {
+              var selectedOri = '';
+              if(tip == 1){
+                    if(value.id == $ori){
+                        selectedDes = "selected";
+                    }
+                $('#movimientos-ori_mov').append('<option '+selectedDes+' value="'+value.id+'">'+value.nom_campos+'</option>');
+              }else{
+                    if(value.id_aco == $ori){
+                        selectedDes = "selected";
+                    }
+                  $('#movimientos-ori_mov').append('<option '+selectedDes+' value="'+value.id_aco+'">'+value.nom_aco+'</option>');
+              }
+         });
+        }
+      });
+        $.ajax({
+        url:'getcampos',
+        data: {id:tip2},
+        type:'post',
+        dataType:'json',
+        success:function(data) {
+          $(data).each(function( index,value ) {
+               var selectedDes = '';
+              if(tip2 == 1){
+                  if(value.id == $des){
+                    selectedDes = "selected";
+                }
+                $('#movimientos-des_mov').append('<option '+selectedDes+' value="'+value.id+'">'+value.nom_campos+'</option>');
+              }else{
+                  if(value.id_aco == $des){
+                    selectedDes = "selected";
+                    }
+                  $('#movimientos-des_mov').append('<option '+selectedDes+'  value="'+value.id_aco+'">'+value.nom_aco+'</option>');
+              }
+              //console.log( index + ": " + $( this ).text() );
+         });
+        }
+      });
+    }
+
     $('#movimientos-tor_mov').change(function() {
         var tip = $(this).val();
         if(!tip){
@@ -160,18 +245,23 @@ $script = <<< JS
         success:function(data) {
           $(data).each(function( index,value ) {
               if(tip == 1){
-                $('#movimientos-des_mov').append('<option value="'+value.id+'">'+value.nom_campos+'</option>');
+                $('#movimientos-des_mov').append('<option  value="'+value.id+'">'+value.nom_campos+'</option>');
               }else{
                   $('#movimientos-des_mov').append('<option value="'+value.id_aco+'">'+value.nom_aco+'</option>');
               }
-              //console.log( index + ": " + $( this ).text() );
          });
         }
       });
     });
     
     $('#movimientos-tip_mov').trigger('change');
-
+    
+    if($ori && $des){
+        loadUbicaciones();
+    }else{
+        getUbicaciones();
+    }
+    
 JS;
 
 $this->registerJs($script);
