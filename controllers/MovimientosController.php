@@ -81,10 +81,10 @@ class MovimientosController extends Controller
 
         $connection = Yii::$app->db;
         $trans = $connection->beginTransaction();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             try {
-                $stock = $model->can_mov;
 
                 if ($model->tor_mov == 1):
                     $command = $connection->createCommand('UPDATE campos SET stock=(stock-' . $model->can_mov . ') WHERE id = ' . $model->ori_mov);
@@ -93,13 +93,22 @@ class MovimientosController extends Controller
                 endif;
                 $command->execute();
 
+                if ($model->tde_mov == 1):
+                    $command = $connection->createCommand('UPDATE campos SET stock=(stock+' . $model->can_mov . ') WHERE id = ' . $model->des_mov);
+                else:
+                    $command = $connection->createCommand('UPDATE acopios SET stock=(stock+' . $model->can_mov . ') WHERE id_aco = ' . $model->des_mov);
+                endif;
+                $command->execute();
+
                 $model->save();
 
                 $trans->commit();
-                return $this->redirect(['view', 'id' => $model->id_mov]);
+                Yii::$app->session->setFlash('success', 'Se movieron ' . $model->can_mov . ' desde: ' . $model->ori_mov . ' hacia: ' . $model->des_mov);
+                return $this->redirect(['index']);
             } catch (Exception $e) {
                 $trans->rollBack();
-                throw $e;
+                Yii::$app->session->setFlash('error', 'Error en la transacción, intente nuevamente ' . $e);
+                return $this->redirect(['index']);
             }
 
             return $this->redirect(['view', 'id' => $model->id_mov]);

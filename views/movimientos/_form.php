@@ -41,10 +41,12 @@ use kartik\date\DatePicker;
             </div>
             <div class="col-lg-3">
                 <?= $form->field($model, 'fec_cos')->widget(DatePicker::classname(), [
+                    'type' => DatePicker::TYPE_INPUT,
+                    'options' => ['autocomplete' => 'off'],
                     'pluginOptions' => [
-                        'type' => DatePicker::TYPE_INPUT,
-                        'format' => 'dd-mm-yyyy',
-                        'autoclose' => true
+                        'autocomplete' => 'off',
+                        'format' => 'yyyy-mm-dd',
+                        'autoclose' => true,
                     ]
                 ]);
                 ?>
@@ -78,6 +80,12 @@ use kartik\date\DatePicker;
                 <?= $form->field($model, 'can_mov')->textInput(['class' => 'form-control 1 2 3']) ?>
             </div>
         </div>
+
+        <!--<div class="row">
+            <div class="col-lg-3">
+                <?php /*= $form->field($model, 'nom_des')->textInput() */?>
+            </div>
+        </div>-->
 
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success btn-sm 1 2 3']) ?>
@@ -137,14 +145,6 @@ $script = <<< JS
         dataType:'json',
         success:function(data) {
           $(data).each(function( index,value ) {
-                /*var selectedOri = '';
-                if(value.id == ori){
-                    selectedOri = "selected";
-                }
-                var selectedDes = '';
-                if(value.id == des){
-                    selectedDes = "selected";
-                }*/
                 $('#movimientos-ori_mov').append('<option value="'+value.id+'">'+value.nom_campos+'</option>');
                 $('#movimientos-des_mov').append('<option value="'+value.id+'">'+value.nom_campos+'</option>');
          });
@@ -196,7 +196,6 @@ $script = <<< JS
                     }
                   $('#movimientos-des_mov').append('<option '+selectedDes+'  value="'+value.id_aco+'">'+value.nom_aco+'</option>');
               }
-              //console.log( index + ": " + $( this ).text() );
          });
         }
       });
@@ -211,6 +210,7 @@ $script = <<< JS
         }
         $('#movimientos-ori_mov').html('');
         $('#movimientos-ori_mov').append('<option value=""> - </option>');
+        
       $.ajax({
         url:'getcampos',
         data: {id:tip},

@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
+use yii\behaviors\AttributeBehavior;
 
 /**
  * This is the model class for table "movimientos".
@@ -23,6 +25,8 @@ use Yii;
  */
 class Movimientos extends \yii\db\ActiveRecord
 {
+
+    //public $nom_des;
     /**
      * {@inheritdoc}
      */
@@ -40,8 +44,9 @@ class Movimientos extends \yii\db\ActiveRecord
             ['can_mov', 'validarStock'],
             [['cod_mov', 'fec_cos', 'can_mov', 'ori_mov', 'tor_mov', 'tde_mov', 'des_mov', 'cer_mov', 'tip_mov'], 'required'],
             [['cod_mov', 'can_mov', 'ori_mov', 'des_mov', 'car_mov', 'cer_mov', 'tip_mov'], 'integer'],
+            ['cod_mov', 'unique'],
 
-            ['fec_cos', 'date', 'format' => 'php:d-m-Y'],
+            ['fec_cos', 'date', 'format' => 'php:Y-m-d'],
 
             [['cos_mov'], 'string', 'max' => 300],
             [['var_mov'], 'string', 'max' => 200],
@@ -67,6 +72,8 @@ class Movimientos extends \yii\db\ActiveRecord
             [['cer_mov'], 'exist', 'skipOnError' => true, 'targetClass' => Cereales::className(), 'targetAttribute' => ['cer_mov' => 'id_cer']],
         ];
     }
+
+
 
     /**
      * {@inheritdoc}

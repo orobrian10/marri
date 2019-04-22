@@ -11,6 +11,19 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="movimientos-index">
 
+    <?php if (Yii::$app->session->hasFlash('success')) { ?>
+        <div class="alert alert-success">
+            <?= Yii::$app->session->getFlash('success'); ?>
+        </div>
+    <?php } ?>
+
+    <?php if (Yii::$app->session->hasFlash('error')) { ?>
+        <div class="alert alert-danger">
+            <!-- flash message -->
+            <?= Yii::$app->session->getFlash('error'); ?>
+        </div>
+    <?php } ?>
+
     <?= $this->render('/common/_index', [
         'entity' => 'Movimientos',
         'entitySing' => 'Movimiento',
