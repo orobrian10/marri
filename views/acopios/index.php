@@ -44,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ],
+            'stock',
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'dataProvider' => $dataProvider,

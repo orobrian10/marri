@@ -17,7 +17,7 @@ class AcopiosSearch extends Acopios
     public function rules()
     {
         return [
-            [['id_aco', 'cer_aco', 'lot_aco', 'sil_aco'], 'integer'],
+            [['id_aco', 'cer_aco', 'lot_aco', 'sil_aco', 'stock'], 'integer'],
             [['nom_aco','ubi_aco'], 'safe'],
         ];
     }
@@ -62,6 +62,7 @@ class AcopiosSearch extends Acopios
             'cer_aco' => $this->cer_aco,
             'lot_aco' => $this->lot_aco,
             'sil_aco' => $this->sil_aco,
+            'stock' => $this->stock,
         ]);
 
         $query->andFilterWhere(['like', 'nom_aco', $this->nom_aco]);

@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cereales-index">
 
-    <?php Pjax::begin(['enablePushState' => false]); ?>
+    <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'toolbar' => [
             [
-                'content' => Html::a('Actualizar', Url::to(['index']), ['class' => 'btn btn-sm btn-link btn-gridview-menu showLoading']),
+                'content' => Html::a('Actualizar', './index', ['class' => 'btn btn-sm btn-link btn-gridview-menu showLoading']),
             ],
             [
                 'content' => '<div class="export-source">' . ExportMenu::widget([

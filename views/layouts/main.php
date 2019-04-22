@@ -54,11 +54,6 @@ AppAsset::register($this);
             'options' => ['class' => 'showLoading']
         ],
         [
-            'label' => 'Cereales',
-            'url' => ['/cereales/index'],
-            'options' => ['class' => 'showLoading']
-        ],
-        [
             'label' => 'Acopios',
             'items' => [
                 [
@@ -72,6 +67,16 @@ AppAsset::register($this);
                     'options' => ['class' => 'showLoading']
                 ],
             ],
+        ],
+        [
+            'label' => 'Cereales',
+            'url' => ['/cereales/index'],
+            'options' => ['class' => 'showLoading']
+        ],
+        [
+            'label' => 'Movimientos',
+            'url' => ['/movimientos/index'],
+            'options' => ['class' => 'showLoading']
         ],
         [
             'label' => 'Localidades',

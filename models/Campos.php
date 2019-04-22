@@ -31,7 +31,7 @@ class Campos extends \yii\db\ActiveRecord
     {
         return [
             [['nom_campos', 'loc_campos', 'hec_tot_campos', 'hec_sem_campos'], 'required'],
-            [['loc_campos', 'hec_tot_campos', 'hec_sem_campos'], 'integer'],
+            [['loc_campos', 'hec_tot_campos', 'hec_sem_campos', 'stock'], 'integer'],
             [['nom_campos'], 'string', 'max' => 40],
         ];
     }
@@ -47,6 +47,7 @@ class Campos extends \yii\db\ActiveRecord
             'loc_campos' => Yii::t('app', 'Localidad'),
             'hec_tot_campos' => Yii::t('app', 'Hectáreas totales'),
             'hec_sem_campos' => Yii::t('app', 'Hectáreas a sembrar'),
+            'stock' => Yii::t('app', 'Stock (qq)'),
         ];
     }
 

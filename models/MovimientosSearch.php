@@ -4,22 +4,21 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Campos;
+use app\models\Movimientos;
 
 /**
- * CamposSearch represents the model behind the search form of `app\models\Campos`.
+ * MovimientosSearch represents the model behind the search form of `app\models\Movimientos`.
  */
-class CamposSearch extends Campos
+class MovimientosSearch extends Movimientos
 {
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'hec_tot_campos', 'hec_sem_campos', 'stock'], 'integer'],
-            [['nom_campos', 'loc_campos'], 'safe'],
+            [['id_mov', 'cod_mov', 'cos_mov', 'fec_cos', 'can_mov', 'ori_mov', 'des_mov', 'car_mov', 'tip_mov'], 'integer'],
+            [['cer_mov','var_mov'], 'safe'],
         ];
     }
 
@@ -39,16 +38,11 @@ class CamposSearch extends Campos
      *
      * @return ActiveDataProvider
      */
-
     public function search($params)
     {
-        $query = Campos::find()->joinWith('localidades');
-
-        //$query->leftJoin('localidades','localidades.id_loc = campos.loc_campos');
+        $query = Movimientos::find()->joinWith('cereales');;
 
         // add conditions that should always apply here
-
-//        $query->join(['JOIN', 'localidades', 'loc_campos = id_loc']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -64,14 +58,19 @@ class CamposSearch extends Campos
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'hec_tot_campos' => $this->hec_tot_campos,
-            'hec_sem_campos' => $this->hec_sem_campos,
-            'loc_campos' => $this->loc_campos,
-            'stock' => $this->stock
+            'id_mov' => $this->id_mov,
+            'cod_mov' => $this->cod_mov,
+            'cos_mov' => $this->cos_mov,
+            'fec_cos' => $this->fec_cos,
+            'can_mov' => $this->can_mov,
+            'ori_mov' => $this->ori_mov,
+            'des_mov' => $this->des_mov,
+            'car_mov' => $this->car_mov,
+            'tip_mov' => $this->tip_mov,
         ]);
 
-        $query->andFilterWhere(['like', 'nom_campos', $this->nom_campos]);
+        $query->andFilterWhere(['like', 'var_mov', $this->var_mov]);
+        $query->andFilterWhere(['like', 'cereales.nom_cer', $this->cer_mov]);
 
         return $dataProvider;
     }

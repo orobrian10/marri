@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'hec_tot_campos',
             'hec_sem_campos',
+            'stock',
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'dataProvider' => $dataProvider,

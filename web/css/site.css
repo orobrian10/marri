@@ -738,7 +738,7 @@ ul.select2-selection__rendered:after {
 }
 
 .form-group {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .form-hint {
@@ -753,7 +753,7 @@ ul.select2-selection__rendered:after {
 .requerido-asterisco,
 form div.required label.control-label:after {
     content: "*";
-    color: #009ad9;
+    color: #46a948;
     font-weight: bold;
 }
 
@@ -3299,4 +3299,18 @@ body {
 .select2-container--krajee .select2-selection--single .select2-selection__clear {
     right: 20px !important;
     font-size: 16px !important;
+}
+
+.help-block{
+    font-size: 12px!important;
+    margin-bottom: 0px!important;
+}
+
+.control-label{
+    font-size: 13px!important;
+    font-weight: 400;
+}
+
+.wrap{
+    min-height: calc(100% - 28px);
 }
