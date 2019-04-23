@@ -3326,6 +3326,20 @@ input.krajee-datepicker{
     margin-top: 50px;
 }
 
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+    background: #46a948!important;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.text-black{
+    color:black;
+}
+
 .box1 img,.box1:after,.box1:before{width:100%;transition:all .3s ease 0s}
 .box1 .icon,.box2,.box3,.box4,.box5 .icon li a{text-align:center}
 .box10:after,.box10:before,.box1:after,.box1:before,.box2 .inner-content:after,.box3:after,.box3:before,.box4:before,.box5:after,.box5:before,.box6:after,.box7:after,.box7:before{content:""}

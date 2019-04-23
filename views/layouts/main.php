@@ -119,7 +119,11 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <span class="pull-right">Desarrollado por Brian Oroño</span>
+        <div class="row">
+            <div class="col-lg-12 text-center text-black vcenter">
+                developed by <img src="<?= Yii::getAlias('@web') ?>/img/logo-skware.png">
+            </div>
+        </div>
     </div>
 </footer>
 

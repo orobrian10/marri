@@ -42,6 +42,9 @@ class Movimientos extends \yii\db\ActiveRecord
     {
         return [
             ['can_mov', 'validarStock'],
+
+            [['ori_mov','des_mov'], 'validarOrigenDestino'],
+
             [['cod_mov', 'fec_cos', 'can_mov', 'ori_mov', 'tor_mov', 'tde_mov', 'des_mov', 'cer_mov', 'tip_mov'], 'required'],
             [['cod_mov', 'ori_mov', 'des_mov', 'car_mov', 'cer_mov', 'tip_mov'], 'integer'],
             ['can_mov', 'integer', 'min' => 1],
@@ -131,6 +134,19 @@ class Movimientos extends \yii\db\ActiveRecord
             endif;
             if ($stockAct < $this->can_mov):
                 $this->addError($attribute, 'No hay suficiente stock');
+            endif;
+        endif;
+    }
+
+    public function validarOrigenDestino($attribute)
+    {
+        if ($this->ori_mov && $this->des_mov):
+            if ($this->ori_mov == $this->des_mov):
+                if ($this->tor_mov == 1 && $this->tde_mov == 1):
+                    $this->addError($attribute, 'Destino y Orígen no pueden ser iguales');
+                elseif ($this->tor_mov == 2 && $this->tde_mov == 2):
+                    $this->addError($attribute, 'Destino y Orígen no pueden ser iguales');
+                endif;
             endif;
         endif;
     }
