@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\AcopiosLugares */
 
-$this->title = Yii::t('app', 'Create Acopios Lugares');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Acopios Lugares'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Crear Lugar de Acopio');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Lugares de Acopios'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="acopios-lugares-create">

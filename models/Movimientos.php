@@ -43,7 +43,8 @@ class Movimientos extends \yii\db\ActiveRecord
         return [
             ['can_mov', 'validarStock'],
             [['cod_mov', 'fec_cos', 'can_mov', 'ori_mov', 'tor_mov', 'tde_mov', 'des_mov', 'cer_mov', 'tip_mov'], 'required'],
-            [['cod_mov', 'can_mov', 'ori_mov', 'des_mov', 'car_mov', 'cer_mov', 'tip_mov'], 'integer'],
+            [['cod_mov', 'ori_mov', 'des_mov', 'car_mov', 'cer_mov', 'tip_mov'], 'integer'],
+            ['can_mov', 'integer', 'min' => 1],
             ['cod_mov', 'unique'],
 
             ['fec_cos', 'date', 'format' => 'php:Y-m-d'],
@@ -72,7 +73,6 @@ class Movimientos extends \yii\db\ActiveRecord
             [['cer_mov'], 'exist', 'skipOnError' => true, 'targetClass' => Cereales::className(), 'targetAttribute' => ['cer_mov' => 'id_cer']],
         ];
     }
-
 
 
     /**
@@ -122,7 +122,14 @@ class Movimientos extends \yii\db\ActiveRecord
             else:
                 $tot = Acopios::findOne(['id_aco' => $this->ori_mov]);
             endif;
-            if ($tot->stock < $this->can_mov):
+            if (!$this->isNewRecord):
+                $sdoAnterior = Movimientos::findOne(['id_mov' => $this->id_mov]);
+                $sdoAnterior = $sdoAnterior->can_mov;
+                $stockAct = $tot->stock + $sdoAnterior;
+            else:
+                $stockAct = $tot->stock;
+            endif;
+            if ($stockAct < $this->can_mov):
                 $this->addError($attribute, 'No hay suficiente stock');
             endif;
         endif;

@@ -23,7 +23,7 @@ use kartik\date\DatePicker;
         <div class="row">
             <div class="col-lg-3">
                 <?php $var = ['1' => 'Ingresar', '2' => 'Retirar', '3' => 'Transladar'] ?>
-                <?= $form->field($model, 'tip_mov')->dropDownList($var, ['prompt' => ' -    ']); ?>
+                <?= $form->field($model, 'tip_mov')->dropDownList($var, ['prompt' => ' - ','disabled' => (!$model->isNewRecord) ? 'disabled' : false]); ?>
             </div>
             <div class="col-lg-3">
                 <?= $form->field($model, 'cod_mov')->textInput(['class' => 'form-control 1 2 3']) ?>

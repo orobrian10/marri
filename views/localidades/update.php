@@ -5,12 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Localidades */
 
-$this->title = Yii::t('app', 'Update Localidades: {name}', [
+$this->title = Yii::t('app', 'Modificar Localidad: {name}', [
     'name' => $model->id_loc,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Localidades'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_loc, 'url' => ['view', 'id' => $model->id_loc]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('app', 'Modificar');
 ?>
 <div class="localidades-update">
 
