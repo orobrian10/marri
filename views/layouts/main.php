@@ -88,6 +88,7 @@ AppAsset::register($this);
             'url' => ['/proveedores/index'],
             'options' => ['class' => 'showLoading']
         ],
+        (!Yii::$app->user->isGuest) ? ['label' => 'Desconectar','url' => ['/site/logout'],'options' => ['class' => 'showLoading']] : ''
     ];
 
 

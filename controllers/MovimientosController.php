@@ -148,9 +148,38 @@ class MovimientosController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $connection = Yii::$app->db;
+        $datos = $this->findModel($id);
+        $stockMov = $datos->can_mov;
+        $idOrigen = $datos->ori_mov;
+        $idDestino = $datos->des_mov;
 
-        return $this->redirect(['index']);
+        $trans = $connection->beginTransaction();
+
+        try {
+            if ($datos->tor_mov == 1):
+                $command = $connection->createCommand('UPDATE campos SET stock=(stock+' . $stockMov . ') WHERE id = ' . $idOrigen);
+            else:
+                $command = $connection->createCommand('UPDATE acopios SET stock=(stock+' . $stockMov . ') WHERE id_aco = ' . $idOrigen);
+            endif;
+            $command->execute();
+
+            if ($datos->tde_mov == 1):
+                $command = $connection->createCommand('UPDATE campos SET stock=(stock-' . $stockMov . ') WHERE id = ' . $idDestino);
+            else:
+                $command = $connection->createCommand('UPDATE acopios SET stock=(stock-' . $stockMov . ') WHERE id_aco = ' . $idDestino);
+            endif;
+            $command->execute();
+
+            $datos->delete();
+            $trans->commit();
+            Yii::$app->session->setFlash('success', 'Se eliminó el movimiento correctamente.');
+            return $this->redirect(['index']);
+        } catch (Exception $e) {
+            $trans->rollBack();
+            Yii::$app->session->setFlash('error', 'Error en la transacción, intente nuevamente ' . $e);
+            return $this->redirect(['index']);
+        }
     }
 
     /**

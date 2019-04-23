@@ -9,7 +9,8 @@ use app\models\AcopiosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
+use yii\filters\AccessRule;
 /**
  * AcopiosController implements the CRUD actions for Acopios model.
  */
@@ -18,13 +19,21 @@ class AcopiosController extends Controller
     /**
      * {@inheritdoc}
      */
+
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'create', 'update', 'view', 'findModel', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
