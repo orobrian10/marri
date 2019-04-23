@@ -2,11 +2,11 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Maquirriain-Soft';
 ?>
 <div class="site-index">
     <br>
-    <h4 class="text-center">Bienvenido a Maquirrain-Soft!</h4>
+    <h4 class="text-center">Bienvenido a Maquirriain-Soft!</h4>
 
     <div class="body-content">
 
