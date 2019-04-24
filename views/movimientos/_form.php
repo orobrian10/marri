@@ -25,22 +25,22 @@ use kartik\date\DatePicker;
                 <?php $var = ['1' => 'Ingresar', '2' => 'Retirar', '3' => 'Transladar'] ?>
                 <?= $form->field($model, 'tip_mov')->dropDownList($var, ['prompt' => ' - ', 'disabled' => (!$model->isNewRecord) ? 'disabled' : false]); ?>
             </div>
-            <div class="col-lg-3">
-                <?= $form->field($model, 'cod_mov')->textInput(['class' => 'form-control 1 2 3']) ?>
+            <div class="col-lg-3 1 2 3">
+                <?= $form->field($model, 'cod_mov')->textInput(['class' => 'form-control']) ?>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 1 2 3">
                 <?php $var = ArrayHelper::map(Cereales::find()->all(), 'id_cer', 'nom_cer'); ?>
-                <?= $form->field($model, 'cer_mov')->dropDownList($var, ['prompt' => ' - ', 'class' => 'form-control 1 2 3']); ?>
+                <?= $form->field($model, 'cer_mov')->dropDownList($var, ['prompt' => ' - ', 'class' => 'form-control']); ?>
             </div>
-            <div class="col-lg-3">
-                <?= $form->field($model, 'var_mov')->dropDownList([], ['prompt' => ' - ', 'class' => 'form-control 1 2']); ?>
+            <div class="col-lg-3 1 2">
+                <?= $form->field($model, 'var_mov')->dropDownList([], ['prompt' => ' - ', 'class' => 'form-control']); ?>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
-                <?= $form->field($model, 'cos_mov')->textInput(['class' => 'form-control 1 2']) ?>
+            <div class="col-lg-3 1 2">
+                <?= $form->field($model, 'cos_mov')->textInput(['class' => 'form-control']) ?>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 1 2 3">
                 <?= $form->field($model, 'fec_cos')->widget(DatePicker::classname(), [
                     'type' => DatePicker::TYPE_INPUT,
                     'options' => ['autocomplete' => 'off'],
@@ -53,32 +53,32 @@ use kartik\date\DatePicker;
                 ?>
 
             </div>
-            <div class="col-lg-3">
-                <?= $form->field($model, 'car_mov')->textInput(['class' => 'form-control 2']) ?>
+            <div class="col-lg-3 2">
+                <?= $form->field($model, 'car_mov')->textInput(['class' => 'form-control']) ?>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-6">
-                <?= $form->field($model, 'tor_mov')->dropDownList(['' => ' - ', '1' => 'Campo', '2' => 'Acopio'], ['class' => 'form-control 1 2 3']) ?>
+            <div class="col-lg-6 1 2 3">
+                <?= $form->field($model, 'tor_mov')->dropDownList(['' => ' - ', '1' => 'Campo', '2' => 'Acopio'], ['class' => 'form-control']) ?>
             </div>
-            <div class="col-lg-6">
-                <?= $form->field($model, 'ori_mov')->dropDownList(['' => ' - '], ['class' => 'form-control 1 2 3']) ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-6">
-                <?= $form->field($model, 'tde_mov')->dropDownList(['' => ' - ', '1' => 'Campo', '2' => 'Acopio'], ['class' => 'form-control 1 2 3']) ?>
-            </div>
-            <div class="col-lg-6">
-                <?= $form->field($model, 'des_mov')->dropDownList(['' => ' - '], ['class' => 'form-control 1 2 3']) ?>
+            <div class="col-lg-6 1 2 3">
+                <?= $form->field($model, 'ori_mov')->dropDownList(['' => ' - '], ['class' => 'form-control']) ?>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-3">
-                <?= $form->field($model, 'can_mov')->textInput(['class' => 'form-control 1 2 3']) ?>
+            <div class="col-lg-6 1 2 3">
+                <?= $form->field($model, 'tde_mov')->dropDownList(['' => ' - ', '1' => 'Campo', '2' => 'Acopio'], ['class' => 'form-control']) ?>
+            </div>
+            <div class="col-lg-6 1 2 3">
+                <?= $form->field($model, 'des_mov')->dropDownList(['' => ' - '], ['class' => 'form-control']) ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 1 2 3">
+                <?= $form->field($model, 'can_mov')->textInput(['class' => 'form-control']) ?>
             </div>
         </div>
 
@@ -88,8 +88,8 @@ use kartik\date\DatePicker;
             </div>
         </div>-->
 
-        <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success btn-sm 1 2 3']) ?>
+        <div class="form-group  1 2 3">
+            <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success btn-sm']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
@@ -109,29 +109,36 @@ $var = ($model->var_mov) ? $model->var_mov : 0;
 
 $script = <<< JS
     
-    $('input.1,input.2,input.3,select.1,select.2,select.3,button.1').parent('div').hide();
-    $('.field-movimientos-fec_cos').hide();
+   // $('input.1,input.2,input.3,select.1,select.2,select.3,button.1').parent('div').hide();
+    $('div.1, div.2, div.3').hide();
+    //$('.field-movimientos-fec_cos').hide();
 
     $('#movimientos-tip_mov').change(function() {
       var value = $(this).val();
       if(value == ''){
-          $('.field-movimientos-fec_cos').hide();
-          $('input.1,input.2,input.3,select.1,select.2,select.3,button.1').parent('div').hide();
+          //$('.field-movimientos-fec_cos').hide();
+          //$('input.1,input.2,input.3,select.1,select.2,select.3,button.1').parent('div').hide();
+          $('div.1, div.2, div.3').hide();
       }
       if(value == 1){
-          $('input.1,input.2,input.3,select.1,select.2,select.3').parent('div').hide();
-          $('input.1,select.1,button.1').parent('div').show();
-          $('.field-movimientos-fec_cos').show();
+          //$('input.1,input.2,input.3,select.1,select.2,select.3').parent('div').hide();
+          $('div.1, div.2, div.3').hide();
+          $('div.1').show();
+          //$('.field-movimientos-fec_cos').show();
       }
       if(value == 2){
-          $('input.1,input.2,input.3,select.1,select.2,select.3').parent('div').hide();
+          /*$('input.1,input.2,input.3,select.1,select.2,select.3').parent('div').hide();
           $('input.2,select.2,button.1').parent('div').show();
-          $('.field-movimientos-fec_cos').show();
+          $('.field-movimientos-fec_cos').show();*/
+          $('div.1, div.2, div.3').hide();
+          $('div.2').show();
       }
       if(value == 3){
-          $('.field-movimientos-fec_cos').hide();
+         /* $('.field-movimientos-fec_cos').hide();
           $('input.1,input.2,input.3,select.1,select.2,select.3').parent('div').hide();
-          $('input.3,select.3,button.1').parent('div').show();
+          $('input.3,select.3,button.1').parent('div').show();*/
+         $('div.1, div.2, div.3').hide();
+          $('div.3').show();
       }
     }); 
     

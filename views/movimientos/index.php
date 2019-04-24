@@ -29,6 +29,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'entitySing' => 'Movimiento',
         'controller' => 'movimientos',
         'columns' => [
+            [
+                'attribute' => 'tip_mov',
+                'value' => function ($model) {
+                    if ($model->tip_mov == '1'):
+                        return 'Ingresos';
+                    elseif ($model->tip_mov == '2'):
+                        return 'Retiros';
+                    else:
+                        return 'Traslados';
+                    endif;
+                },
+                'filter' => ['1' => 'Ingresos', '2' => 'Retiros', '3' => 'Traslados'],
+                'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'options' => ['prompt' => ''],
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                        'width' => '150px'
+                    ],
+                ],
+            ],
             'cod_mov',
             [
                 'attribute' => 'cer_mov',
@@ -66,27 +87,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'car_mov',
-            [
-                'attribute' => 'tip_mov',
-                'value' => function ($model) {
-                    if ($model->tip_mov == '1'):
-                        return 'Ingresos';
-                    elseif ($model->tip_mov):
-                        return 'Retiros';
-                    else:
-                        return 'Traslados';
-                    endif;
-                },
-                'filter' => ['1' => 'Ingresos', '2' => 'Retiros', '3' => 'Traslados'],
-                'filterType' => GridView::FILTER_SELECT2,
-                'filterWidgetOptions' => [
-                    'options' => ['prompt' => ''],
-                    'pluginOptions' => [
-                        'allowClear' => true,
-                        'width' => '150px'
-                    ],
-                ],
-            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'dataProvider' => $dataProvider,

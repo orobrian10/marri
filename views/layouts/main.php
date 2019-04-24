@@ -68,15 +68,21 @@ AppAsset::register($this);
                 ],
             ],
         ],
+
         [
             'label' => 'Cereales',
-            'url' => ['/cereales/index'],
-            'options' => ['class' => 'showLoading']
-        ],
-        [
-            'label' => 'Variedades',
-            'url' => ['/variedades/index'],
-            'options' => ['class' => 'showLoading']
+            'items' => [
+                [
+                    'label' => 'Cereales',
+                    'url' => ['/cereales/index'],
+                    'options' => ['class' => 'showLoading']
+                ],
+                [
+                    'label' => 'Variedades',
+                    'url' => ['/variedades/index'],
+                    'options' => ['class' => 'showLoading']
+                ],
+            ],
         ],
         [
             'label' => 'Movimientos',
