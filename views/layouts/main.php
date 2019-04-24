@@ -74,6 +74,11 @@ AppAsset::register($this);
             'options' => ['class' => 'showLoading']
         ],
         [
+            'label' => 'Variedades',
+            'url' => ['/variedades/index'],
+            'options' => ['class' => 'showLoading']
+        ],
+        [
             'label' => 'Movimientos',
             'url' => ['/movimientos/index'],
             'options' => ['class' => 'showLoading']

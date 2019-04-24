@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Acopios;
 use app\models\Campos;
+use app\models\Variedades;
 use Yii;
 use app\models\Movimientos;
 use app\models\MovimientosSearch;
@@ -33,7 +34,7 @@ class MovimientosController extends Controller
                 ],
                 'rules' => [
                     [
-                        'actions' => ['index', 'create', 'update', 'view', 'getcampos', 'delete'],
+                        'actions' => ['index', 'create', 'update', 'view', 'getcampos', 'getvariedades', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -134,7 +135,6 @@ class MovimientosController extends Controller
         $stockMov = $datos->can_mov;
         $idOrigen = $datos->ori_mov;
         $idDestino = $datos->des_mov;
-
 
 
         if ($model->load(Yii::$app->request->post())) {
@@ -271,6 +271,13 @@ class MovimientosController extends Controller
         else:
             $res = Acopios::find()->all();
         endif;
+        return Json::encode($res);
+    }
+
+    public function actionGetvariedades()
+    {
+        $id = Yii::$app->request->post('id');
+        $res = Variedades::find()->where(['cer_var' => $id])->all();
         return Json::encode($res);
     }
 }

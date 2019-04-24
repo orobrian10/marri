@@ -30,7 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'controller' => 'movimientos',
         'columns' => [
             'cod_mov',
-            'var_mov',
+            [
+                'attribute' => 'cer_mov',
+                'value' => 'cereales.nom_cer'
+            ],
+            [
+                'attribute' => 'var_mov',
+                'value' => 'variedades.des_var'
+            ],
             'cos_mov',
             'fec_cos',
             'can_mov',
@@ -59,10 +66,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'car_mov',
-            [
-                'attribute' => 'cer_mov',
-                'value' => 'cereales.nom_cer'
-            ],
             [
                 'attribute' => 'tip_mov',
                 'value' => function ($model) {

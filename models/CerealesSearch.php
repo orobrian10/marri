@@ -18,7 +18,7 @@ class CerealesSearch extends Cereales
     {
         return [
             [['id_cer'], 'integer'],
-            [['nom_cer', 'var_cer'], 'safe'],
+            [['nom_cer'], 'safe'],
         ];
     }
 
@@ -61,8 +61,7 @@ class CerealesSearch extends Cereales
             'id_cer' => $this->id_cer,
         ]);
 
-        $query->andFilterWhere(['like', 'nom_cer', $this->nom_cer])
-            ->andFilterWhere(['like', 'var_cer', $this->var_cer]);
+        $query->andFilterWhere(['like', 'nom_cer', $this->nom_cer]);
 
         return $dataProvider;
     }

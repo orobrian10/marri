@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CerealesSearch */
+/* @var $model app\models\VariedadesSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="cereales-search">
+<div class="variedades-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -18,9 +18,9 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'id_cer') ?>
+    <?= $form->field($model, 'id_var') ?>
 
-    <?= $form->field($model, 'nom_cer') ?>
+    <?= $form->field($model, 'des_var') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

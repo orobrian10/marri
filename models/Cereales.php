@@ -27,9 +27,8 @@ class Cereales extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nom_cer', 'var_cer'], 'required'],
+            [['nom_cer'], 'required'],
             [['nom_cer'], 'string', 'max' => 50],
-            [['var_cer'], 'string', 'max' => 200],
         ];
     }
 
@@ -41,7 +40,6 @@ class Cereales extends \yii\db\ActiveRecord
         return [
             'id_cer' => 'Id Cer',
             'nom_cer' => 'Nombre',
-            'var_cer' => 'Variedad',
         ];
     }
 

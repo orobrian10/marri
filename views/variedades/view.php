@@ -4,20 +4,20 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Cereales */
+/* @var $model app\models\Variedades */
 
-$this->title = $model->id_cer;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cereales'), 'url' => ['index']];
+$this->title = $model->id_var;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Variedades'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="cereales-view">
+<div class="variedades-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id_cer], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id_cer], [
+        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id_var], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id_var], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id_cer',
-            'nom_cer',
+            'id_var',
+            'des_var',
         ],
     ]) ?>
 

@@ -1,22 +1,20 @@
 <?php
 
-use yii\helpers\Url;
-
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\CerealesSearch */
+/* @var $searchModel app\models\VariedadesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Cereales');
+$this->title = Yii::t('app', 'Variedades');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cereales-index">
+<div class="variedades-index">
 
     <?= $this->render('/common/_index', [
-        'entity' => 'Cereales',
-        'entitySing' => 'Cereal',
-        'controller' => 'cereales',
+        'entity' => 'Variedades',
+        'entitySing' => 'Variedad',
+        'controller' => 'variedades',
         'columns' => [
-            'nom_cer',
+            'des_var',
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'dataProvider' => $dataProvider,

@@ -53,7 +53,7 @@ class Movimientos extends \yii\db\ActiveRecord
             ['fec_cos', 'date', 'format' => 'php:Y-m-d'],
 
             [['cos_mov'], 'string', 'max' => 300],
-            [['var_mov'], 'string', 'max' => 200],
+            [['var_mov'], 'integer', 'min' => 1],
 
             [['var_mov', 'cos_mov'], 'required', 'when' => function ($model) {
                 return $model->tip_mov == 1 || $model->tip_mov == 2;
@@ -106,6 +106,11 @@ class Movimientos extends \yii\db\ActiveRecord
     public function getcereales()
     {
         return $this->hasOne(Cereales::className(), ['id_cer' => 'cer_mov']);
+    }
+
+    public function getvariedades()
+    {
+        return $this->hasOne(Variedades::className(), ['id_var' => 'var_mov']);
     }
 
     /**

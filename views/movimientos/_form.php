@@ -33,7 +33,7 @@ use kartik\date\DatePicker;
                 <?= $form->field($model, 'cer_mov')->dropDownList($var, ['prompt' => ' - ', 'class' => 'form-control 1 2 3']); ?>
             </div>
             <div class="col-lg-3">
-                <?= $form->field($model, 'var_mov')->textInput(['maxlength' => true, 'class' => 'form-control 1 2']) ?>
+                <?= $form->field($model, 'var_mov')->dropDownList([], ['prompt' => ' - ', 'class' => 'form-control 1 2']); ?>
             </div>
         </div>
         <div class="row">
@@ -103,6 +103,9 @@ $tde = ($model->tde_mov) ? $model->tde_mov : 1;
 
 $ori = ($model->ori_mov) ? $model->ori_mov : 0;
 $des = ($model->des_mov) ? $model->des_mov : 0;
+
+$cer = ($model->cer_mov) ? $model->cer_mov : 0;
+$var = ($model->var_mov) ? $model->var_mov : 0;
 
 $script = <<< JS
     
@@ -256,6 +259,47 @@ $script = <<< JS
     });
     
     $('#movimientos-tip_mov').trigger('change');
+    
+    $('#movimientos-cer_mov').change(function() {
+        $('#movimientos-var_mov').html('');
+        $('#movimientos-var_mov').append('<option value=""> - </option>');
+        $.ajax({
+        url:'getvariedades',
+        data: {id: $(this).val()},
+        type:'post',
+        dataType:'json',
+        success:function(data) {
+          $(data).each(function( index,value ) {
+              $('#movimientos-var_mov').append('<option  value="'+value.id_var+'">'+value.des_var+'</option>');
+         });
+        }
+      });
+    });
+    
+    function loadCereales(){
+        var cer = $cer;
+        var variedad = $var;
+        $('#movimientos-var_mov').html('');
+        $('#movimientos-var_mov').append('<option value=""> - </option>');
+        $.ajax({
+        url:'getvariedades',
+        data: {id: cer},
+        type:'post',
+        dataType:'json',
+        success:function(data) {
+          $(data).each(function( index,value ) {
+              if(value.id_var == variedad){
+                    var selected = "selected";
+                }
+              $('#movimientos-var_mov').append('<option '+ selected +'  value="'+value.id_var+'">'+value.des_var+'</option>');
+         });
+        }
+      });
+    }
+    
+    if($cer){
+        loadCereales();
+    }
     
     if($ori && $des){
         loadUbicaciones();
