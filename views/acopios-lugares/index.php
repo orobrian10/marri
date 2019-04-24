@@ -15,7 +15,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'controller' => 'acopioslugares',
         'columns' => [
             'nom_lug',
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'view' => function () {
+                        return false;
+                    },
+                ]],
         ],
         'dataProvider' => $dataProvider,
         'searchModel' => $searchModel,

@@ -37,7 +37,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'hec_tot_campos',
             'hec_sem_campos',
             'stock',
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'view' => function () {
+                        return false;
+                    },
+                ]],
         ],
         'dataProvider' => $dataProvider,
         'searchModel' => $searchModel,

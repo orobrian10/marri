@@ -22,7 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'controller' => 'localidades',
         'columns' => [
             'nom_loc',
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'view' => function () {
+                        return false;
+                    },
+                ]],
         ],
         'dataProvider' => $dataProvider,
         'searchModel' => $searchModel,

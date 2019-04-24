@@ -45,7 +45,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
             'stock',
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'view' => function () {
+                        return false;
+                    },
+                ]],
         ],
         'dataProvider' => $dataProvider,
         'searchModel' => $searchModel,
