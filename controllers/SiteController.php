@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Movimientos;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -9,6 +10,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use Mpdf\Mpdf;
 
 class SiteController extends Controller
 {
@@ -23,7 +25,7 @@ class SiteController extends Controller
                 'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','logout'],
+                        'actions' => ['index', 'logout', 'createpdf'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -52,6 +54,16 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function actionCreatepdf()
+    {
+        $mpdf = new mPDF();
+        $movimientos = Movimientos::find()->all();
+        $mpdf->WriteHTML($this->renderPartial('report', array('mov' => $movimientos)));
+        $mpdf->Output();
+        exit;
+        //return $this->renderPartial('mpdf');
     }
 
     /**

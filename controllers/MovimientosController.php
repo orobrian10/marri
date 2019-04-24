@@ -89,22 +89,27 @@ class MovimientosController extends Controller
 
                 if ($model->tor_mov == 1):
                     $command = $connection->createCommand('UPDATE campos SET stock=(stock-' . $model->can_mov . ') WHERE id = ' . $model->ori_mov);
+                    $nom_ori = Campos::findOne(['id', $model->ori_mov])->nom_campos;
                 else:
                     $command = $connection->createCommand('UPDATE acopios SET stock=(stock-' . $model->can_mov . ') WHERE id_aco = ' . $model->ori_mov);
+                    $nom_ori = Acopios::findOne(['id_aco', $model->ori_mov])->nom_aco;
                 endif;
                 $command->execute();
 
                 if ($model->tde_mov == 1):
                     $command = $connection->createCommand('UPDATE campos SET stock=(stock+' . $model->can_mov . ') WHERE id = ' . $model->des_mov);
+                    $nom_des = Campos::findOne(['id', $model->des_mov])->nom_campos;
                 else:
                     $command = $connection->createCommand('UPDATE acopios SET stock=(stock+' . $model->can_mov . ') WHERE id_aco = ' . $model->des_mov);
+                    $nom_des = Acopios::findOne(['id_aco', $model->des_mov])->nom_aco;
                 endif;
                 $command->execute();
 
                 $model->save();
 
                 $trans->commit();
-                Yii::$app->session->setFlash('success', 'Se movieron ' . $model->can_mov . ' desde: ' . $model->ori_mov . ' hacia: ' . $model->des_mov);
+
+                Yii::$app->session->setFlash('success', 'Se movieron <strong>' . $model->can_mov . ' (qq)</strong> desde: <strong>' . $nom_ori . '</strong> hacia: <strong>' . $nom_des . '</strong>');
                 return $this->redirect(['index']);
             } catch (Exception $e) {
                 $trans->rollBack();

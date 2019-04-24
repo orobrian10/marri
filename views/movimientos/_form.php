@@ -82,12 +82,6 @@ use kartik\date\DatePicker;
             </div>
         </div>
 
-        <!--<div class="row">
-            <div class="col-lg-3">
-                <?php /*= $form->field($model, 'nom_des')->textInput() */ ?>
-            </div>
-        </div>-->
-
         <div class="form-group  1 2 3">
             <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success btn-sm']) ?>
         </div>
@@ -173,17 +167,19 @@ $script = <<< JS
         dataType:'json',
         success:function(data) {
           $(data).each(function( index,value ) {
+              console.log(value.id);
               var selectedOri = '';
               if(tip == 1){
+                 
                     if(value.id == $ori){
-                        selectedDes = "selected";
+                        selectedOri = "selected";
                     }
-                $('#movimientos-ori_mov').append('<option '+selectedDes+' value="'+value.id+'">'+value.nom_campos+'</option>');
+                $('#movimientos-ori_mov').append('<option '+selectedOri+' value="'+value.id+'">'+value.nom_campos+'</option>');
               }else{
                     if(value.id_aco == $ori){
-                        selectedDes = "selected";
+                        selectedOri = "selected";
                     }
-                  $('#movimientos-ori_mov').append('<option '+selectedDes+' value="'+value.id_aco+'">'+value.nom_aco+'</option>');
+                  $('#movimientos-ori_mov').append('<option '+selectedOri+' value="'+value.id_aco+'">'+value.nom_aco+'</option>');
               }
          });
         }
