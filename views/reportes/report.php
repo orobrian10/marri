@@ -92,6 +92,7 @@
                 <td><?php echo $nom_ori; ?></td>
                 <td><?php echo $des_ori; ?></td>
             </tr>
+
         <?php endforeach; ?>
         </tbody>
     </table>

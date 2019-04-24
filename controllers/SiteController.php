@@ -59,7 +59,7 @@ class SiteController extends Controller
     public function actionCreatepdf()
     {
         $mpdf = new mPDF();
-        $movimientos = Movimientos::find()->all();
+        $movimientos = Movimientos::find()->orderBy('fec_cos','asc')->all();
         $mpdf->WriteHTML($this->renderPartial('report', array('mov' => $movimientos)));
         $mpdf->Output();
         exit;
