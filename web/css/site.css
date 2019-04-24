@@ -1465,6 +1465,7 @@ form div.required.has-error label.control-label:after {
     color: #46a948;
     display: inline-block;
     font-size: 20px;
+    user-select: none !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -3341,7 +3342,7 @@ input.krajee-datepicker{
 }
 
 span.glyphicon{
-    color:black !important;
+    color:black !important
 }
 
 .box1 img,.box1:after,.box1:before{width:100%;transition:all .3s ease 0s}

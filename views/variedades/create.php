@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Variedades */
 
-$this->title = Yii::t('app', 'Create Variedades');
+$this->title = Yii::t('app', 'Crear Variedad');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Variedades'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

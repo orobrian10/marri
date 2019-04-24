@@ -77,7 +77,8 @@ class AcopiosLugaresController extends Controller
         $model = new AcopiosLugares();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_lug]);
+            Yii::$app->session->setFlash('success', 'El lugar de acopio ' . $model->nom_lug . ' se agregó correctamente.');
+            return $this->redirect('index');
         }
 
         return $this->render('create', [
@@ -97,7 +98,8 @@ class AcopiosLugaresController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_lug]);
+            Yii::$app->session->setFlash('success', 'El lugar de acopio ' . $model->nom_lug . ' se modificó correctamente.');
+            return $this->redirect('index');
         }
 
         return $this->render('update', [

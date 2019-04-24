@@ -79,7 +79,8 @@ class CamposController extends Controller
         $localidades = Localidades::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'El campo ' . $model->nom_campos . ' se agregó correctamente.');
+            return $this->redirect('index');
         }
 
         return $this->render('create', [
@@ -101,7 +102,8 @@ class CamposController extends Controller
         $localidades = Localidades::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'El campo ' . $model->nom_campos . ' se modificó correctamente.');
+            return $this->redirect('index');
         }
 
         return $this->render('update', [

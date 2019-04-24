@@ -9,7 +9,7 @@ $this->title = Yii::t('app', 'Modificar Localidad: {name}', [
     'name' => $model->id_loc,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Localidades'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id_loc, 'url' => ['view', 'id' => $model->id_loc]];
+$this->params['breadcrumbs'][] = ['label' => $model->nom_loc, 'url' => ['view', 'id' => $model->id_loc]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Modificar');
 ?>
 <div class="localidades-update">

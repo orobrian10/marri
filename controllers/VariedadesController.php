@@ -67,7 +67,8 @@ class VariedadesController extends Controller
         $model = new Variedades();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_var]);
+            Yii::$app->session->setFlash('success', 'La variedad ' . $model->des_var . ' se agegó correctamente.');
+            return $this->redirect('index');
         }
 
         return $this->render('create', [
@@ -87,7 +88,8 @@ class VariedadesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_var]);
+            Yii::$app->session->setFlash('success', 'La variedad ' . $model->des_var . ' se modificó correctamente.');
+            return $this->redirect('index');
         }
 
         return $this->render('update', [

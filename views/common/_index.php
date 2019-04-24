@@ -14,7 +14,19 @@ use kartik\export\ExportMenu;
 $this->title = Yii::t('app', 'Listado');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cereales-index">
+<div>
+
+    <?php if (Yii::$app->session->hasFlash('error')) { ?>
+        <div class="alert alert-danger">
+            <?= Yii::$app->session->getFlash('error'); ?>
+        </div>
+    <?php } ?>
+
+    <?php if (Yii::$app->session->hasFlash('success')) { ?>
+        <div class="alert alert-success">
+            <?= Yii::$app->session->getFlash('success'); ?>
+        </div>
+    <?php } ?>
 
     <?php Pjax::begin(); ?>
 

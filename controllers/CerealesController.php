@@ -77,7 +77,8 @@ class CerealesController extends Controller
         $model = new Cereales();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_cer]);
+            Yii::$app->session->setFlash('success', 'El cereal ' . $model->nom_cer . ' se agregó correctamente.');
+            return $this->redirect('index');
         }
 
         return $this->render('create', [
@@ -97,7 +98,8 @@ class CerealesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_cer]);
+            Yii::$app->session->setFlash('success', 'El cereal ' . $model->nom_cer . ' se modificó correctamente.');
+            return $this->redirect('index');
         }
 
         return $this->render('update', [

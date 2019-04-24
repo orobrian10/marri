@@ -87,7 +87,7 @@ $this->title = 'Maquirriain-Soft';
                     <div id="ver-instituciones" class="collapse" aria-expanded="false" style="">
                         <div class="row">
                             <div class="col-lg-12">
-                                <a href="#"><img class="img-responsive center-block"
+                                <a href="https://auth.afip.gob.ar/contribuyente_/login.xhtml"><img class="img-responsive center-block"
                                                  src="<?= Yii::getAlias('@web') ?>/img/logo_afip.png"
                                                  alt="Argentina"></a>
                             </div>

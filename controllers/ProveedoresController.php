@@ -78,7 +78,8 @@ class ProveedoresController extends Controller
         $localidades = Localidades::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_pro]);
+            Yii::$app->session->setFlash('success', 'El proveedor ' . $model->nom_pro . ' se agregó correctamente.');
+            return $this->redirect('index');
         }
 
         return $this->render('create', [
@@ -100,7 +101,8 @@ class ProveedoresController extends Controller
         $localidades = Localidades::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_pro]);
+            Yii::$app->session->setFlash('success', 'El proveedor ' . $model->nom_pro . ' se modificó correctamente.');
+            return $this->redirect('index');
         }
 
         return $this->render('update', [

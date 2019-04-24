@@ -73,7 +73,7 @@ AppAsset::register($this);
             'label' => 'Cereales',
             'items' => [
                 [
-                    'label' => 'Cereales',
+                    'label' => 'Listado',
                     'url' => ['/cereales/index'],
                     'options' => ['class' => 'showLoading']
                 ],

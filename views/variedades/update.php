@@ -5,12 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Variedades */
 
-$this->title = Yii::t('app', 'Update Variedades: {name}', [
+$this->title = Yii::t('app', 'Modificar Variedad: {name}', [
     'name' => $model->id_var,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Variedades'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id_var, 'url' => ['view', 'id' => $model->id_var]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = ['label' => $model->des_var, 'url' => ['view', 'id' => $model->id_var]];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Modificar');
 ?>
 <div class="variedades-update">
 
