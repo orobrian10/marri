@@ -2,11 +2,11 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Maquirriain-Soft';
+$this->title = 'O. Maquirriain SRL';
 ?>
 <div class="site-index">
     <br>
-    <h4 class="text-center">Bienvenido a Maquirriain-Soft!</h4>
+    <h4 class="text-center">Bienvenido a Gestión <?= $this->title ?></h4>
 
     <div class="body-content">
 

@@ -11,6 +11,7 @@ use yii\filters\AccessControl;
 use yii\filters\AccessRule;
 use Mpdf\Mpdf;
 use app\models\Reportes;
+use Mpdf\Output\Destination;
 
 /**
  * LocalidadesController implements the CRUD actions for Localidades model.
@@ -51,7 +52,7 @@ class ReportesController extends Controller
             $mpdf = new mPDF();
             $movimientos = Movimientos::find()->where(['between', 'fec_cos', $model->fde, $model->fha])->orderBy('fec_cos', 'asc')->all();
             $mpdf->WriteHTML($this->renderPartial('report', array('mov' => $movimientos, 'fde' => $model->fde, 'fha' => $model->fha)));
-            $mpdf->Output("Movimientos.pdf", 1);
+            $mpdf->Output("Movimientos.pdf", Destination::DOWNLOAD);
             exit;
         endif;
 
