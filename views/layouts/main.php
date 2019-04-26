@@ -75,6 +75,11 @@ AppAsset::register($this);
             'options' => ['class' => 'showLoading']
         ],
         [
+            'label' => 'Reportes',
+            'url' => ['/reportes/index'],
+            'options' => ['class' => 'showLoading']
+        ],
+        [
             'label' => 'Localidades',
             'url' => ['/localidades/index'],
             'options' => ['class' => 'showLoading']
