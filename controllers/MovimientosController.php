@@ -83,33 +83,26 @@ class MovimientosController extends Controller
         $connection = Yii::$app->db;
         $trans = $connection->beginTransaction();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
 
+            $model->save();
             try {
 
-                if ($model->tor_mov == 1):
-                    $command = $connection->createCommand('UPDATE campos SET stock=(stock-' . $model->can_mov . ') WHERE id = ' . $model->ori_mov);
-                    $nom_ori = Campos::findOne(['id', $model->ori_mov])->nom_campos;
-                else:
-                    $command = $connection->createCommand('UPDATE acopios SET stock=(stock-' . $model->can_mov . ') WHERE id_aco = ' . $model->ori_mov);
-                    $nom_ori = Acopios::findOne(['id_aco', $model->ori_mov])->nom_aco;
-                endif;
+                $values_ant = Acopios::findOne(['id_aco', $model->des_mov]);
+
+                $command = $connection->createCommand('UPDATE acopios SET stock=(stock+' . $model->can_mov . ') WHERE id_aco = ' . $model->des_mov);
                 $command->execute();
 
-                if ($model->tde_mov == 1):
-                    $command = $connection->createCommand('UPDATE campos SET stock=(stock+' . $model->can_mov . ') WHERE id = ' . $model->des_mov);
-                    $nom_des = Campos::findOne(['id', $model->des_mov])->nom_campos;
-                else:
-                    $command = $connection->createCommand('UPDATE acopios SET stock=(stock+' . $model->can_mov . ') WHERE id_aco = ' . $model->des_mov);
-                    $nom_des = Acopios::findOne(['id_aco', $model->des_mov])->nom_aco;
-                endif;
-                $command->execute();
+                $model->stock_ant_mov = $values_ant->stock;
 
                 $model->save();
 
+                $origen = $model->getlugaresacopios()->where(['id_lug' => $model->ori_mov])->all()[0]['nom_lug'];
+                $destino = $model->getacopios()->where(['id_aco' => $model->des_mov])->all()[0]['nom_aco'];
+
                 $trans->commit();
 
-                Yii::$app->session->setFlash('success', 'Se movieron <strong>' . $model->can_mov . ' (qq)</strong> desde: <strong>' . $nom_ori . '</strong> hacia: <strong>' . $nom_des . '</strong>');
+                Yii::$app->session->setFlash('success', 'Se ingresaron <strong>' . $model->can_mov . ' (qq)</strong> desde: <strong>' . $origen . '</strong> hacia: <strong>' . $destino . '</strong>');
                 return $this->redirect(['index']);
             } catch (Exception $e) {
                 $trans->rollBack();
@@ -138,7 +131,6 @@ class MovimientosController extends Controller
         $model = $this->findModel($id);
         $connection = Yii::$app->db;
         $stockMov = $datos->can_mov;
-        $idOrigen = $datos->ori_mov;
         $idDestino = $datos->des_mov;
 
 
@@ -147,39 +139,12 @@ class MovimientosController extends Controller
             if ($model->save()):
 
                 try {
-                    if ($datos->tor_mov == 1):
-                        /*sumo lo restado anteriormente*/
-                        $command = $connection->createCommand('UPDATE campos SET stock=(stock+' . $stockMov . ') WHERE id = ' . $idOrigen);
-                        $command->execute();
-                        /* resto el nuevo valor */
-                        $command = $connection->createCommand('UPDATE campos SET stock=(stock-' . $model->can_mov . ') WHERE id = ' . $idOrigen);
-                        $command->execute();
-                    else:
-                        /*sumo lo restado anteriormente*/
-                        $command = $connection->createCommand('UPDATE acopios SET stock=(stock+' . $stockMov . ') WHERE id_aco = ' . $idOrigen);
-                        $command->execute();
-                        /* resto el nuevo valor */
-                        $command = $connection->createCommand('UPDATE acopios SET stock=(stock-' . $model->can_mov . ') WHERE id_aco = ' . $idOrigen);
-                        $command->execute();
-                    endif;
-
-
-                    if ($datos->tde_mov == 1):
-                        /*resto lo sumado anteriormente*/
-                        $command = $connection->createCommand('UPDATE campos SET stock=(stock-' . $stockMov . ') WHERE id = ' . $idDestino);
-                        $command->execute();
-
-                        /*sumo nuevo valor*/
-                        $command = $connection->createCommand('UPDATE campos SET stock=(stock+' . $model->can_mov . ') WHERE id = ' . $idDestino);
-                        $command->execute();
-                    else:
-                        /*resto lo sumado anteriormente*/
-                        $command = $connection->createCommand('UPDATE acopios SET stock=(stock-' . $stockMov . ') WHERE id_aco = ' . $idDestino);
-                        $command->execute();
-                        /*sumo nuevo valor*/
-                        $command = $connection->createCommand('UPDATE acopios SET stock=(stock+' . $model->can_mov . ') WHERE id_aco = ' . $idDestino);
-                        $command->execute();
-                    endif;
+                    /*resto lo sumado anteriormente*/
+                    $command = $connection->createCommand('UPDATE acopios SET stock=(stock-' . $stockMov . ') WHERE id_aco = ' . $idDestino);
+                    $command->execute();
+                    /* sumo el nuevo valor */
+                    $command = $connection->createCommand('UPDATE acopios SET stock=(stock+' . $model->can_mov . ') WHERE id_aco = ' . $idDestino);
+                    $command->execute();
 
                     $trans->commit();
                     Yii::$app->session->setFlash('success', 'Se modificó el movimiento correctamente.');
@@ -193,8 +158,6 @@ class MovimientosController extends Controller
             endif;
 
         }
-
-        // && $model->save()
 
         return $this->render('update', [
             'model' => $model,
@@ -213,24 +176,13 @@ class MovimientosController extends Controller
         $connection = Yii::$app->db;
         $datos = $this->findModel($id);
         $stockMov = $datos->can_mov;
-        $idOrigen = $datos->ori_mov;
         $idDestino = $datos->des_mov;
 
         $trans = $connection->beginTransaction();
 
         try {
-            if ($datos->tor_mov == 1):
-                $command = $connection->createCommand('UPDATE campos SET stock=(stock+' . $stockMov . ') WHERE id = ' . $idOrigen);
-            else:
-                $command = $connection->createCommand('UPDATE acopios SET stock=(stock+' . $stockMov . ') WHERE id_aco = ' . $idOrigen);
-            endif;
-            $command->execute();
 
-            if ($datos->tde_mov == 1):
-                $command = $connection->createCommand('UPDATE campos SET stock=(stock-' . $stockMov . ') WHERE id = ' . $idDestino);
-            else:
-                $command = $connection->createCommand('UPDATE acopios SET stock=(stock-' . $stockMov . ') WHERE id_aco = ' . $idDestino);
-            endif;
+            $command = $connection->createCommand('UPDATE acopios SET stock=(stock-' . $stockMov . ') WHERE id_aco = ' . $idDestino);
             $command->execute();
 
             $datos->delete();

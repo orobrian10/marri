@@ -17,6 +17,7 @@ class Reportes extends Model
 
     public $fde;
     public $fha;
+    public $aco;
 
     /**
      * {@inheritdoc}
@@ -24,7 +25,7 @@ class Reportes extends Model
     public function rules()
     {
         return [
-            [['fde', 'fha'], 'required'],
+            [['fde', 'fha','aco'], 'required'],
             [['fde', 'fha'], 'date', 'format' => 'php:Y-m-d'],
             ['fde','validateDates'],
         ];
@@ -38,6 +39,7 @@ class Reportes extends Model
         return [
             'fde' => 'Fecha desde',
             'fha' => 'Fecha hasta',
+            'aco' => 'Acopio',
         ];
     }
 

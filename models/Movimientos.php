@@ -26,7 +26,6 @@ use yii\behaviors\AttributeBehavior;
 class Movimientos extends \yii\db\ActiveRecord
 {
 
-    //public $nom_des;
     /**
      * {@inheritdoc}
      */
@@ -41,37 +40,15 @@ class Movimientos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['can_mov', 'validarStock'],
+           /* ['can_mov', 'validarStock'],
 
-            [['ori_mov','des_mov'], 'validarOrigenDestino'],
+            [['ori_mov', 'des_mov'], 'validarOrigenDestino'],*/
 
-            [['cod_mov', 'fec_cos', 'can_mov', 'ori_mov', 'tor_mov', 'tde_mov', 'des_mov', 'cer_mov', 'tip_mov'], 'required'],
-            [['cod_mov', 'ori_mov', 'des_mov', 'car_mov', 'cer_mov', 'tip_mov'], 'integer'],
+            [['fec_cos', 'can_mov', 'ori_mov', 'des_mov', 'cer_mov', 'car_mov'], 'required'],
+            [['ori_mov', 'des_mov', 'car_mov', 'cer_mov', 'stock_ant_mov'], 'integer'],
             ['can_mov', 'integer', 'min' => 1],
-            ['cod_mov', 'unique'],
 
             ['fec_cos', 'date', 'format' => 'php:Y-m-d'],
-
-            [['cos_mov'], 'string', 'max' => 300],
-            [['var_mov'], 'integer', 'min' => 1],
-
-            [['var_mov', 'cos_mov'], 'required', 'when' => function ($model) {
-                return $model->tip_mov == 1 || $model->tip_mov == 2;
-            }, 'whenClient' => "function (attribute, value) {
-                mov = $('#movimientos-tip_mov').val();
-                if(mov == 1 || mov == 2)
-                    return true;
-                return false;
-            }"],
-
-            [['car_mov'], 'required', 'when' => function ($model) {
-                return $model->tip_mov == 2;
-            }, 'whenClient' => "function (attribute, value) {
-                mov = $('#movimientos-tip_mov').val();
-                if(mov == 2)
-                    return true;
-                return false;
-            }"],
 
             [['cer_mov'], 'exist', 'skipOnError' => true, 'targetClass' => Cereales::className(), 'targetAttribute' => ['cer_mov' => 'id_cer']],
         ];
@@ -84,19 +61,13 @@ class Movimientos extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_mov' => 'Id Mov',
-            'cod_mov' => 'Código de movimiento',
-            'var_mov' => 'Variedad de cereal',
-            'cos_mov' => 'Cosecha',
-            'fec_cos' => 'Fecha de Cosecha',
+            'id_mov' => 'Código de Movimiento',
+            'fec_cos' => 'Fecha',
             'can_mov' => 'Cantidad (qq)',
-            'ori_mov' => 'Orígen',
+            'ori_mov' => 'Procedencia',
             'des_mov' => 'Destino',
             'car_mov' => 'N° carta de porte',
             'cer_mov' => 'Cereral',
-            'tip_mov' => 'Tipo de movimiento',
-            'tor_mov' => 'Tipo de Orígen',
-            'tde_mov' => 'Tipo de Destino'
         ];
     }
 
@@ -108,9 +79,14 @@ class Movimientos extends \yii\db\ActiveRecord
         return $this->hasOne(Cereales::className(), ['id_cer' => 'cer_mov']);
     }
 
-    public function getvariedades()
+    public function getacopios()
     {
-        return $this->hasOne(Variedades::className(), ['id_var' => 'var_mov']);
+        return $this->hasOne(Acopios::className(), ['id_aco' => 'des_mov']);
+    }
+
+    public function getlugaresacopios()
+    {
+        return $this->hasOne(AcopiosLugares::className(), ['id_lug' => 'ori_mov']);
     }
 
     /**
@@ -122,14 +98,15 @@ class Movimientos extends \yii\db\ActiveRecord
         return new MovimientosQuery(get_called_class());
     }
 
-    public function validarStock($attribute)
+    /*public function validarStock($attribute)
     {
         if ($this->ori_mov && $this->can_mov > 0):
-            if ($this->tor_mov == 1):
-                $tot = Campos::findOne(['id' => $this->ori_mov]);
-            else:
-                $tot = Acopios::findOne(['id_aco' => $this->ori_mov]);
+
+            $tot = Acopios::findOne(['id_aco' => $this->ori_mov]);
+            if ($this->isNewRecord):
+                $this->stock_ant_mov = $tot->stock + $this->can_mov;
             endif;
+
             if (!$this->isNewRecord):
                 $sdoAnterior = Movimientos::findOne(['id_mov' => $this->id_mov]);
                 $sdoAnterior = $sdoAnterior->can_mov;
@@ -141,19 +118,15 @@ class Movimientos extends \yii\db\ActiveRecord
                 $this->addError($attribute, 'No hay suficiente stock');
             endif;
         endif;
-    }
+    }*/
 
-    public function validarOrigenDestino($attribute)
+    /*public function validarOrigenDestino($attribute)
     {
         if ($this->ori_mov && $this->des_mov):
             if ($this->ori_mov == $this->des_mov):
-                if ($this->tor_mov == 1 && $this->tde_mov == 1):
-                    $this->addError($attribute, 'Destino y Orígen no pueden ser iguales');
-                elseif ($this->tor_mov == 2 && $this->tde_mov == 2):
-                    $this->addError($attribute, 'Destino y Orígen no pueden ser iguales');
-                endif;
+                $this->addError($attribute, 'Destino y Orígen no pueden ser iguales');
             endif;
         endif;
-    }
+    }*/
 
 }

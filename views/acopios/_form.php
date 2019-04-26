@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use app\models\Cereales;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Acopios */
@@ -21,7 +22,8 @@ use yii\helpers\ArrayHelper;
             <?= $form->field($model, 'ubi_aco')->dropDownList($var, ['prompt' => ' - ']); ?>
         </div>
         <div class="col-lg-4">
-            <?= $form->field($model, 'cer_aco')->textInput() ?>
+            <?php $var = ArrayHelper::map(Cereales::find()->all(), 'id_cer', 'nom_cer'); ?>
+            <?= $form->field($model, 'cer_aco')->dropDownList($var, ['prompt' => ' - ', 'class' => 'form-control']); ?>
         </div>
 
         <div class="col-lg-4">

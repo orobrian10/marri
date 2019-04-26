@@ -1,4 +1,9 @@
 <style>
+    body {
+        font-size: 13px;
+        font-family: "Calibri Light";
+    }
+
     .row {
         width: 100%;
         margin-bottom: 5px;
@@ -14,13 +19,13 @@
         <strong>MAQUIRRIAIN S.A.</strong>
     </div>
     <div style="width: 33.33%; text-align: center;float:left">
-        Fecha desde: <?php echo date('d/m/Y',strtotime($fde)); ?>
+        Fecha desde: <?php echo date('d/m/Y', strtotime($fde)); ?>
     </div>
     <div style="width: 33.33%; text-align: center;float:left">
-        Fecha hasta: <?php echo date('d/m/Y',strtotime($fha)); ?>
+        Fecha hasta: <?php echo date('d/m/Y', strtotime($fha)); ?>
     </div>
 </div>
-<div class="row">
+<!--<div class="row">
     <div style="width: 33.33%; text-align: center;float:left">
         Domicilio: -
     </div>
@@ -30,70 +35,56 @@
     <div style="width: 33.33%; text-align: center;float:left">
         C.U.I.T: -
     </div>
-</div>
+</div>-->
 <div class="row" style="text-align: center">
     <hr>
-    <strong><u>Movimientos</u></strong>
+    <strong><u>Movimientos de cereales - Acopio: <?= $mov[0]['nom_aco']; ?></u></strong>
 </div>
 <div class="row">
     <table>
         <thead>
         <tr>
-            <th style="text-align: left">Tipo</th>
-            <th style="text-align: left">Cód. Mov.</th>
+            <th style="text-align: left; width: 10%;">Cód.</th>
 
-            <th style="text-align: left">Fecha</th>
+            <th style="text-align: left; width: 10%;">Fecha</th>
 
-            <th style="text-align: left">Entrados</th>
-            <th style="text-align: left">Salidos</th>
+            <th style="text-align: left; width: 20%;">Procedencia</th>
 
-            <th style="text-align: left">Orígen</th>
-            <th style="text-align: left">Destino</th>
+            <th style="text-align: left; width: 15%;">Entrados</th>
+            <th style="text-align: left; width: 15%;">Salidos</th>
+
+            <th style="text-align: left; width: 10%;">Saldo</th>
+
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($mov as $m):
-            $entrados = '';
-            $salidos = '';
-            if ($m['tor_mov'] == 1):
-                $nom_ori = \app\models\Campos::findOne(['id', $m['ori_mov']])->nom_campos;
+        <?php
+        $stockAct = $mov[0]['stock'];
+        foreach ($mov as $key => $m):
+            if ($m['tip'] == 1):
+                $stock = $stockAct + $m['can_mov'];
             else:
-                $nom_ori = \app\models\Acopios::findOne(['id_aco', $m['ori_mov']])->nom_aco;
-            endif;
-
-            if ($m['tde_mov'] == 1):
-                $des_ori = \app\models\Campos::findOne(['id', $m['des_mov']])->nom_campos;
-            else:
-                $des_ori = \app\models\Acopios::findOne(['id_aco', $m['des_mov']])->nom_aco;
+                $stock = $stockAct - $m['can_mov'];
             endif;
             ?>
-            <tr>
-                <td>
-                    <?php
-                    if ($m['tip_mov'] == '1'):
-                        echo 'Ingresos';
-                    elseif ($m['tip_mov'] == '2'):
-                        echo 'Retiros';
-                    else:
-                        echo 'Traslados';
-                    endif;
-                    ?>
-                </td>
-                <td><?php echo $m['cod_mov']; ?></td>
 
-                <?php if ($m['tip_mov'] == 1):
-                    $entrados = $m['can_mov'];
-                else:
-                    $salidos = $m['can_mov'];
-                endif; ?>
-                <td><?php echo date('d/m/Y',strtotime($m['fec_cos'])); ?></td>
-                <td><?php echo ($entrados) ? number_format($entrados, 2,',','.') : '-'; ?></td>
-                <td><?php echo ($salidos) ? number_format($salidos, 2,',','.') : '-'; ?></td>
-                <td><?php echo $nom_ori; ?></td>
-                <td><?php echo $des_ori; ?></td>
+            <tr>
+
+                <td><?php echo ($m['tip'] == 1) ? 'I-' : 'V-';
+                    echo str_pad($m['id_mov'], 4, 0, STR_PAD_LEFT); ?></td>
+                <td><?php echo date('d/m/Y', strtotime($m['fec_cos'])); ?></td>
+                <td><?php echo $m['nom_lug']; ?></td>
+                <td style="text-align: center;"><?php echo ($m['can_mov'] && $m['tip'] == 1) ? number_format($m['can_mov'], 2, ',', '.') : '-'; ?></td>
+                <td style="text-align: center;"><?php echo ($m['can_mov'] && $m['tip'] == 2) ? number_format($m['can_mov'], 2, ',', '.') : '-'; ?></td>
+                <td><?php echo number_format($stock, 2, ',', '.'); ?></td>
+                <!--<td><?php /*echo $m['nom_aco']; */
+                ?></td>-->
             </tr>
 
-        <?php endforeach; ?>
+        <?php
+
+            $stockAct = $stock;
+        endforeach; ?>
         </tbody>
     </table>
 </div>

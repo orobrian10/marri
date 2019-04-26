@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use kartik\date\DatePicker;
 use kartik\form\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Acopios;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\LocalidadesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -25,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="col-lg-4">
                             <?= $form->field($model, 'fde')->widget(DatePicker::classname(), [
                                 'type' => DatePicker::TYPE_INPUT,
-                                'options' => ['autocomplete' => 'off'],
+                                'options' => ['autocomplete' => 'off', 'value' => date("Y-m-d", strtotime("-1 month"))],
                                 'pluginOptions' => [
                                     'autocomplete' => 'off',
                                     'format' => 'yyyy-mm-dd',
@@ -37,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="col-lg-4">
                             <?= $form->field($model, 'fha')->widget(DatePicker::classname(), [
                                 'type' => DatePicker::TYPE_INPUT,
-                                'options' => ['autocomplete' => 'off'],
+                                'options' => ['autocomplete' => 'off', 'value' => date("Y-m-d", strtotime("+1 month"))],
                                 'pluginOptions' => [
                                     'autocomplete' => 'off',
                                     'format' => 'yyyy-mm-dd',
@@ -46,11 +49,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]);
                             ?>
                         </div>
+
                         <div class="col-lg-4">
-                            <label for="tre">Tipo de Reporte</label>
-                            <select class="form-control" name="tre" id="tre">
-                                <option value="1">Movimientos</option>
-                            </select>
+                            <?php $var = ArrayHelper::map(Acopios::find()->all(), 'id_aco', 'nom_aco'); ?>
+                            <?= $form->field($model, 'aco')->dropDownList($var,['prompt' => ' - '], ['class' => 'form-control']) ?>
                         </div>
                     </div>
                 </div>

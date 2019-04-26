@@ -17,8 +17,8 @@ class AcopiosSearch extends Acopios
     public function rules()
     {
         return [
-            [['id_aco', 'cer_aco', 'lot_aco', 'sil_aco', 'stock'], 'integer'],
-            [['nom_aco','ubi_aco'], 'safe'],
+            [['id_aco', 'lot_aco', 'sil_aco', 'stock'], 'integer'],
+            [['nom_aco','cer_aco','ubi_aco'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class AcopiosSearch extends Acopios
      */
     public function search($params)
     {
-        $query = Acopios::find()->joinWith('lugares');
+        $query = Acopios::find()->joinWith('lugares')->joinWith('cereales');
 
         // add conditions that should always apply here
 
@@ -59,7 +59,6 @@ class AcopiosSearch extends Acopios
         // grid filtering conditions
         $query->andFilterWhere([
             'id_aco' => $this->id_aco,
-            'cer_aco' => $this->cer_aco,
             'lot_aco' => $this->lot_aco,
             'sil_aco' => $this->sil_aco,
             'stock' => $this->stock,
@@ -67,6 +66,7 @@ class AcopiosSearch extends Acopios
 
         $query->andFilterWhere(['like', 'nom_aco', $this->nom_aco]);
         $query->andFilterWhere(['like', 'acopios_lugares.nom_lug', $this->ubi_aco]);
+        $query->andFilterWhere(['like', 'cereales.nom_cer', $this->cer_aco]);
 
         return $dataProvider;
     }

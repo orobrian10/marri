@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Movimientos;
+use app\models\Ventas;
 
 /**
- * MovimientosSearch represents the model behind the search form of `app\models\Movimientos`.
+ * VentasSearch represents the model behind the search form of `app\models\Ventas`.
  */
-class MovimientosSearch extends Movimientos
+class VentasSearch extends Ventas
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,9 @@ class MovimientosSearch extends Movimientos
     public function rules()
     {
         return [
-            [['id_mov', 'fec_cos', 'can_mov', 'car_mov'], 'integer'],
-            [['cer_mov','des_mov','ori_mov'], 'safe'],
+            [['id_ven'], 'integer'],
+            [['fec_ven', 'cer_ven', 'des_ven'], 'safe'],
+            [['kgs_ven', 'pkg_ven', 'pto_ven'], 'number'],
         ];
     }
 
@@ -40,7 +41,7 @@ class MovimientosSearch extends Movimientos
      */
     public function search($params)
     {
-        $query = Movimientos::find()->joinWith('cereales')->joinWith('acopios')->joinWith('lugaresacopios');
+        $query = Ventas::find()->joinWith('cerVen')->joinWith('desVen');
 
         // add conditions that should always apply here
 
@@ -58,15 +59,15 @@ class MovimientosSearch extends Movimientos
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id_mov' => $this->id_mov,
-            'fec_cos' => $this->fec_cos,
-            'can_mov' => $this->can_mov,
-            'car_mov' => $this->car_mov,
+            'id_ven' => $this->id_ven,
+            'fec_ven' => $this->fec_ven,
+            'kgs_ven' => $this->kgs_ven,
+            'pkg_ven' => $this->pkg_ven,
+            'pto_ven' => $this->pto_ven,
         ]);
 
-        $query->andFilterWhere(['like', 'cereales.nom_cer', $this->cer_mov]);
-        $query->andFilterWhere(['like', 'acopios.nom_aco', $this->des_mov]);
-        $query->andFilterWhere(['like', 'acopios_lugares.nom_lug', $this->ori_mov]);
+        $query->andFilterWhere(['like', 'cereales.nom_cer', $this->cer_ven]);
+        $query->andFilterWhere(['like', 'acopios.nom_aco', $this->des_ven]);
 
         return $dataProvider;
     }

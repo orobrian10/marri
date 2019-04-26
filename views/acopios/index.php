@@ -21,7 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'ubi_aco',
                 'value' => 'lugares.nom_lug'
             ],
-            'cer_aco',
+            [
+                'attribute' => 'cer_aco',
+                'value' => 'cereales.nom_cer'
+            ],
             'lot_aco',
             [
                 'attribute' => 'sil_aco',
@@ -40,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'options' => ['prompt' => ''],
                     'pluginOptions' => [
                         'allowClear' => true,
-                        'width'=>'250px'
+                        'width' => '250px'
                     ],
                 ],
             ],

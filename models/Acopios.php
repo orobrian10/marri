@@ -33,6 +33,7 @@ class Acopios extends \yii\db\ActiveRecord
             [['nom_aco', 'ubi_aco', 'cer_aco', 'lot_aco'], 'required'],
             [['ubi_aco', 'cer_aco', 'lot_aco', 'sil_aco', 'stock'], 'integer'],
             [['nom_aco'], 'string', 'max' => 50],
+            [['cer_aco'], 'exist', 'skipOnError' => true, 'targetClass' => Cereales::className(), 'targetAttribute' => ['cer_aco' => 'id_cer']],
         ];
     }
 
@@ -64,5 +65,10 @@ class Acopios extends \yii\db\ActiveRecord
     public function getlugares()
     {
         return $this->hasOne(AcopiosLugares::className(), ['id_lug' => 'ubi_aco']);
+    }
+
+    public function getcereales()
+    {
+        return $this->hasOne(Cereales::className(), ['id_cer' => 'cer_aco']);
     }
 }

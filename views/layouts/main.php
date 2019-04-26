@@ -50,44 +50,28 @@ AppAsset::register($this);
             'options' => ['class' => 'showLoading']
         ],
         [
-            'label' => 'Campos',
-            'url' => ['/campos/index'],
+            'label' => 'Acopios',
+            'url' => ['/acopios/index'],
             'options' => ['class' => 'showLoading']
         ],
         [
-            'label' => 'Acopios',
-            'items' => [
-                [
-                    'label' => 'Listado',
-                    'url' => ['/acopios/index'],
-                    'options' => ['class' => 'showLoading']
-                ],
-                [
-                    'label' => 'Lugares',
-                    'url' => ['/acopios-lugares/index'],
-                    'options' => ['class' => 'showLoading']
-                ],
-            ],
+            'label' => 'Ubicaciones de Acopios',
+            'url' => ['/acopios-lugares/index'],
+            'options' => ['class' => 'showLoading']
         ],
-
         [
             'label' => 'Cereales',
-            'items' => [
-                [
-                    'label' => 'Listado',
-                    'url' => ['/cereales/index'],
-                    'options' => ['class' => 'showLoading']
-                ],
-                [
-                    'label' => 'Variedades',
-                    'url' => ['/variedades/index'],
-                    'options' => ['class' => 'showLoading']
-                ],
-            ],
+            'url' => ['/cereales/index'],
+            'options' => ['class' => 'showLoading']
         ],
         [
-            'label' => 'Movimientos',
+            'label' => 'Ingresos de Cereal',
             'url' => ['/movimientos/index'],
+            'options' => ['class' => 'showLoading']
+        ],
+        [
+            'label' => 'Ventas',
+            'url' => ['/ventas/index'],
             'options' => ['class' => 'showLoading']
         ],
         [

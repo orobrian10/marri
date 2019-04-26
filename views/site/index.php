@@ -12,18 +12,18 @@ $this->title = 'O. Maquirriain SRL';
 
         <div class="row mt-40">
             <div class="col-md-4 col-sm-6">
-                <a href="campos">
-                    <div class="box1">
-                        <img src="<?= Yii::getAlias('@web') ?>/img/menu/campo.jpg" alt="">
-                        <h3 class="title">CAMPOS</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6">
                 <a href="acopios">
                     <div class="box1">
                         <img src="<?= Yii::getAlias('@web') ?>/img/menu/acopios.jpg" alt="" class="img-thumbn">
                         <h3 class="title">ACOPIOS</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a href="acopios-lugares">
+                    <div class="box1">
+                        <img src="<?= Yii::getAlias('@web') ?>/img/menu/campo.jpg" alt="">
+                        <h3 class="title">UBICACIONES DE ACOPIOS</h3>
                     </div>
                 </a>
             </div>
@@ -41,7 +41,7 @@ $this->title = 'O. Maquirriain SRL';
                 <a href="movimientos">
                     <div class="box1">
                         <img src="<?= Yii::getAlias('@web') ?>/img/menu/movimientos.jpg"" alt="">
-                        <h3 class="title">MOVIMIENTOS</h3>
+                        <h3 class="title">VENTAS</h3>
                     </div>
                 </a>
             </div>

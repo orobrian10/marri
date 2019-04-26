@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'responsive' => true,
         'panel' => [
             'type' => GridView::TYPE_SUCCESS,
-            'heading' => 'Listado de ' . $entity,
+            'heading' => $entity,
             'after' => false,
         ],
         'striped' => true,
