@@ -62,9 +62,9 @@ class Acopios extends \yii\db\ActiveRecord
         return new AcopiosQuery(get_called_class());
     }
 
-    public function getlugares()
+    public function getlocalidades()
     {
-        return $this->hasOne(AcopiosLugares::className(), ['id_lug' => 'ubi_aco']);
+        return $this->hasOne(Localidades::className(), ['id_loc' => 'ubi_aco']);
     }
 
     public function getcereales()

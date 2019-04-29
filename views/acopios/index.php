@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nom_aco',
             [
                 'attribute' => 'ubi_aco',
-                'value' => 'lugares.nom_lug'
+                'value' => 'localidades.nom_loc'
             ],
             [
                 'attribute' => 'cer_aco',

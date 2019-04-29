@@ -84,9 +84,9 @@ class Movimientos extends \yii\db\ActiveRecord
         return $this->hasOne(Acopios::className(), ['id_aco' => 'des_mov']);
     }
 
-    public function getlugaresacopios()
+    public function getlocalidades()
     {
-        return $this->hasOne(AcopiosLugares::className(), ['id_lug' => 'ori_mov']);
+        return $this->hasOne(Localidades::className(), ['id_loc' => 'ori_mov']);
     }
 
     /**

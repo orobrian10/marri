@@ -55,8 +55,8 @@ AppAsset::register($this);
             'options' => ['class' => 'showLoading']
         ],
         [
-            'label' => 'Ubicaciones de Acopios',
-            'url' => ['/acopios-lugares/index'],
+            'label' => 'Localidades',
+            'url' => ['/localidades/index'],
             'options' => ['class' => 'showLoading']
         ],
         [
@@ -77,11 +77,6 @@ AppAsset::register($this);
         [
             'label' => 'Reportes',
             'url' => ['/reportes/index'],
-            'options' => ['class' => 'showLoading']
-        ],
-        [
-            'label' => 'Localidades',
-            'url' => ['/localidades/index'],
             'options' => ['class' => 'showLoading']
         ],
         [

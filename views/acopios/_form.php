@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Cereales;
+use app\models\Localidades;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Acopios */
@@ -18,7 +19,7 @@ use app\models\Cereales;
             <?= $form->field($model, 'nom_aco')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-lg-4">
-            <?php $var = ArrayHelper::map($lugares, 'id_lug', 'nom_lug'); ?>
+            <?php $var = ArrayHelper::map(Localidades::find()->all(), 'id_loc', 'nom_loc'); ?>
             <?= $form->field($model, 'ubi_aco')->dropDownList($var, ['prompt' => ' - ']); ?>
         </div>
         <div class="col-lg-4">

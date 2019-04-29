@@ -6,7 +6,7 @@ use app\models\Cereales;
 use yii\helpers\ArrayHelper;
 use kartik\date\DatePicker;
 use app\models\Acopios;
-use app\models\AcopiosLugares;
+use app\models\Localidades;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Movimientos */
@@ -50,7 +50,7 @@ use app\models\AcopiosLugares;
                 <?= $form->field($model, 'cer_mov')->dropDownList($var, ['prompt' => ' - ', 'class' => 'form-control']); ?>
             </div>
             <div class="col-lg-4">
-                <?php $var = ArrayHelper::map(AcopiosLugares::find()->all(), 'id_lug', 'nom_lug'); ?>
+                <?php $var = ArrayHelper::map(Localidades::find()->all(), 'id_loc', 'nom_loc'); ?>
                 <?= $form->field($model, 'ori_mov')->dropDownList($var,['prompt' => ' - '], ['class' => 'form-control']) ?>
             </div>
             <div class="col-lg-4">

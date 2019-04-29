@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'car_mov',
             [
                 'attribute' => 'ori_mov',
-                'value' => 'lugaresacopios.nom_lug'
+                'value' => 'localidades.nom_loc'
             ],
             [
                 'attribute' => 'des_mov',

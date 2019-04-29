@@ -76,7 +76,6 @@ class AcopiosController extends Controller
     public function actionCreate()
     {
         $model = new Acopios();
-        $lugares = AcopiosLugares::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'El acopio ' . $model->nom_aco . ' se agregó correctamente.');
@@ -84,8 +83,7 @@ class AcopiosController extends Controller
         }
 
         return $this->render('create', [
-            'model' => $model,
-            'lugares' => $lugares
+            'model' => $model
         ]);
     }
 
@@ -99,7 +97,6 @@ class AcopiosController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $lugares = AcopiosLugares::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'El acopio ' . $model->nom_aco . ' se modificó correctamente.');
@@ -107,8 +104,7 @@ class AcopiosController extends Controller
         }
 
         return $this->render('update', [
-            'model' => $model,
-            'lugares' => $lugares
+            'model' => $model
         ]);
     }
 

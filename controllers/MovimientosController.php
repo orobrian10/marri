@@ -97,7 +97,7 @@ class MovimientosController extends Controller
 
                 $model->save();
 
-                $origen = $model->getlugaresacopios()->where(['id_lug' => $model->ori_mov])->all()[0]['nom_lug'];
+                $origen = $model->getlocalidades()->where(['id_loc' => $model->ori_mov])->all()[0]['nom_loc'];
                 $destino = $model->getacopios()->where(['id_aco' => $model->des_mov])->all()[0]['nom_aco'];
 
                 $trans->commit();

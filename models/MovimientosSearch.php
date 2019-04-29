@@ -40,7 +40,7 @@ class MovimientosSearch extends Movimientos
      */
     public function search($params)
     {
-        $query = Movimientos::find()->joinWith('cereales')->joinWith('acopios')->joinWith('lugaresacopios');
+        $query = Movimientos::find()->joinWith('cereales')->joinWith('acopios')->joinWith('localidades');
 
         // add conditions that should always apply here
 
@@ -66,7 +66,7 @@ class MovimientosSearch extends Movimientos
 
         $query->andFilterWhere(['like', 'cereales.nom_cer', $this->cer_mov]);
         $query->andFilterWhere(['like', 'acopios.nom_aco', $this->des_mov]);
-        $query->andFilterWhere(['like', 'acopios_lugares.nom_lug', $this->ori_mov]);
+        $query->andFilterWhere(['like', 'localidades.nom_loc', $this->ori_mov]);
 
         return $dataProvider;
     }
