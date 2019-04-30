@@ -73,7 +73,7 @@
                 <td><?php echo ($m['tip'] == 1) ? 'I-' : 'V-';
                     echo str_pad($m['id_mov'], 4, 0, STR_PAD_LEFT); ?></td>
                 <td><?php echo date('d/m/Y', strtotime($m['fec_cos'])); ?></td>
-                <td><?php echo $m['nom_lug']; ?></td>
+                <td><?php echo $m['nom_loc']; ?></td>
                 <td style="text-align: center;"><?php echo ($m['can_mov'] && $m['tip'] == 1) ? number_format($m['can_mov'], 2, ',', '.') : '-'; ?></td>
                 <td style="text-align: center;"><?php echo ($m['can_mov'] && $m['tip'] == 2) ? number_format($m['can_mov'], 2, ',', '.') : '-'; ?></td>
                 <td><?php echo number_format($stock, 2, ',', '.'); ?></td>

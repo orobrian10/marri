@@ -52,9 +52,9 @@ class ReportesController extends Controller
             $mpdf = new mPDF();
             // $movimientos = Movimientos::find()->joinWith('acopios')->joinWith('lugaresacopios')->where(['between', 'fec_cos', $model->fde, $model->fha])->orderBy('fec_cos', 'asc')->all();
 
-            $sql = "SELECT  cre_mov cre, id_mov id_mov, fec_cos fec_cos, can_mov can_mov, ori_mov ori_mov,nom_lug nom_lug, nom_aco nom_aco, cer_mov cer_mov, 1 tip, stock_ant_mov stock FROM movimientos " .
+            $sql = "SELECT  cre_mov cre, id_mov id_mov, fec_cos fec_cos, can_mov can_mov, ori_mov ori_mov,nom_loc nom_loc, nom_aco nom_aco, cer_mov cer_mov, 1 tip, stock_ant_mov stock FROM movimientos " .
                 " join acopios on des_mov = id_aco " .
-                " join acopios_lugares on ori_mov = id_lug " .
+                " join localidades on ori_mov = id_loc " .
                 " where id_aco = $model->aco " .
                 " UNION " .
                 " SELECT  cre_ven cre, id_ven, fec_ven, kgs_ven, '','', nom_aco, cer_ven, 2, stock_ven FROM ventas " .
