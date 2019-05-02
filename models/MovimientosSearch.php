@@ -18,7 +18,7 @@ class MovimientosSearch extends Movimientos
     {
         return [
             [['id_mov', 'fec_cos', 'can_mov', 'car_mov'], 'integer'],
-            [['cer_mov','des_mov','ori_mov'], 'safe'],
+            [['cer_mov','des_mov','ori_mov', 'cos_mov'], 'safe'],
         ];
     }
 
@@ -67,6 +67,7 @@ class MovimientosSearch extends Movimientos
         $query->andFilterWhere(['like', 'cereales.nom_cer', $this->cer_mov]);
         $query->andFilterWhere(['like', 'acopios.nom_aco', $this->des_mov]);
         $query->andFilterWhere(['like', 'localidades.nom_loc', $this->ori_mov]);
+        $query->andFilterWhere(['like', 'cos_mov', $this->cos_mov]);
 
         return $dataProvider;
     }

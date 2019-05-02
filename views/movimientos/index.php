@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'acopios.nom_aco'
             ],
             'can_mov',
+            'cos_mov',
             ['class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'view' => function () {

@@ -31,11 +31,6 @@ use app\models\Localidades;
             <?= $form->field($model, 'lot_aco')->textInput() ?>
         </div>
 
-        <div class="col-lg-4">
-            <?php $var = ['1' => 'Silo en bolsa', '2' => 'Silo Propio'] ?>
-            <?= $form->field($model, 'sil_aco')->dropDownList($var, ['prompt' => ' - ']); ?>
-        </div>
-
         <?php if($model->isNewRecord): ?>
             <div class="col-lg-4">
                 <?= $form->field($model, 'stock')->textInput() ?>

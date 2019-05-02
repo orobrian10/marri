@@ -44,7 +44,8 @@ class Movimientos extends \yii\db\ActiveRecord
 
             [['ori_mov', 'des_mov'], 'validarOrigenDestino'],*/
 
-            [['fec_cos', 'can_mov', 'ori_mov', 'des_mov', 'cer_mov', 'car_mov'], 'required'],
+            [['fec_cos', 'can_mov', 'ori_mov', 'des_mov', 'cer_mov', 'car_mov', 'cos_mov'], 'required'],
+            [['cos_mov'], 'string', 'max' => 100],
             [['ori_mov', 'des_mov', 'car_mov', 'cer_mov', 'stock_ant_mov'], 'integer'],
             ['can_mov', 'integer', 'min' => 1],
 
@@ -68,6 +69,7 @@ class Movimientos extends \yii\db\ActiveRecord
             'des_mov' => 'Destino',
             'car_mov' => 'N° carta de porte',
             'cer_mov' => 'Cereral',
+            'cos_mov' => 'Cosecha',
         ];
     }
 

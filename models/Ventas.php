@@ -36,7 +36,8 @@ class Ventas extends \yii\db\ActiveRecord
     {
         return [
             [['fec_ven', 'cer_ven', 'kgs_ven', 'pkg_ven', 'pto_ven', 'des_ven', 'stock_ven'], 'required'],
-            [['fec_ven'], 'safe'],
+            [['fec_ven', 'obs_ven'], 'safe'],
+            [['obs_ven'], 'string', 'max' => 100],
             [['cer_ven', 'des_ven'], 'integer'],
             ['kgs_ven', 'validarStock'],
             [['kgs_ven', 'pkg_ven', 'pto_ven'], 'number'],
@@ -58,6 +59,7 @@ class Ventas extends \yii\db\ActiveRecord
             'pkg_ven' => Yii::t('app', 'Precio x Kg'),
             'pto_ven' => Yii::t('app', 'Prectio Total $'),
             'des_ven' => Yii::t('app', 'Destino (Acopio)'),
+            'obs_ven' => Yii::t('app', 'Observación'),
         ];
     }
 

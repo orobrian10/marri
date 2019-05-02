@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'des_ven',
                 'value' => 'desVen.nom_aco'
             ],
+            'obs_ven',
             ['class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'view' => function () {

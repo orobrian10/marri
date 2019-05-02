@@ -26,27 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'cereales.nom_cer'
             ],
             'lot_aco',
-            [
-                'attribute' => 'sil_aco',
-                'value' => function ($model) {
-                    if ($model->sil_aco == '1'):
-                        return 'Silos Bolsa';
-                    elseif ($model->sil_aco):
-                        return 'Silos Propio';
-                    else:
-                        return '';
-                    endif;
-                },
-                'filter' => ['1' => 'Silo en bolsa', '2' => 'Silo Propio'],
-                'filterType' => GridView::FILTER_SELECT2,
-                'filterWidgetOptions' => [
-                    'options' => ['prompt' => ''],
-                    'pluginOptions' => [
-                        'allowClear' => true,
-                        'width' => '250px'
-                    ],
-                ],
-            ],
             'stock',
             ['class' => 'yii\grid\ActionColumn',
                 'buttons' => [

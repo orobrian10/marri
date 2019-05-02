@@ -52,6 +52,12 @@ use yii\helpers\ArrayHelper;
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-lg-12">
+            <?= $form->field($model, 'obs_ven')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success btn-sm']) ?>
     </div>
