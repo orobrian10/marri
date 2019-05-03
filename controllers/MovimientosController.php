@@ -85,7 +85,7 @@ class MovimientosController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->save();
+            //$model->save();
             try {
 
                 $values_ant = Acopios::findOne(['id_aco', $model->des_mov]);
