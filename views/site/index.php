@@ -19,14 +19,14 @@ $this->title = 'O. Maquirriain SRL';
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <!--<div class="col-md-4 col-sm-6">
                 <a href="acopios-lugares">
                     <div class="box1">
-                        <img src="<?= Yii::getAlias('@web') ?>/img/menu/campo.jpg" alt="">
+                        <img src="<?/*= Yii::getAlias('@web') */?>/img/menu/campo.jpg" alt="">
                         <h3 class="title">UBICACIONES DE ACOPIOS</h3>
                     </div>
                 </a>
-            </div>
+            </div>-->
             <div class="col-md-4 col-sm-6">
                 <a href="cereales">
                     <div class="box1">
@@ -53,14 +53,14 @@ $this->title = 'O. Maquirriain SRL';
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <!--<div class="col-md-4 col-sm-6">
                 <a href="proveedores">
                     <div class="box1">
-                        <img src="<?= Yii::getAlias('@web') ?>/img/menu/proveedores.jpg"" alt="">
+                        <img src="<?/*= Yii::getAlias('@web') */?>/img/menu/proveedores.jpg"" alt="">
                         <h3 class="title">PROVEEDORES</h3>
                     </div>
                 </a>
-            </div>
+            </div>-->
         </div>
     </div>
 
