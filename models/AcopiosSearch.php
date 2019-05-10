@@ -17,7 +17,7 @@ class AcopiosSearch extends Acopios
     public function rules()
     {
         return [
-            [['id_aco', 'lot_aco', 'stock'], 'integer'],
+            [['id_aco', 'stock'], 'integer'],
             [['nom_aco','cer_aco','ubi_aco'], 'safe'],
         ];
     }
