@@ -21,11 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'ubi_aco',
                 'value' => 'localidades.nom_loc'
             ],
-            [
-                'attribute' => 'cer_aco',
-                'value' => 'cereales.nom_cer'
-            ],
-            'lot_aco',
             'stock',
             ['class' => 'yii\grid\ActionColumn',
                 'buttons' => [

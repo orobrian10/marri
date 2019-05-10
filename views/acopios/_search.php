@@ -24,10 +24,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ubi_aco') ?>
 
-    <?= $form->field($model, 'cer_aco') ?>
-
-    <?= $form->field($model, 'lot_aco') ?>
-
     <?php // echo $form->field($model, 'sil_aco') ?>
 
     <div class="form-group">

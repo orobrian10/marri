@@ -40,7 +40,7 @@ class AcopiosSearch extends Acopios
      */
     public function search($params)
     {
-        $query = Acopios::find()->joinWith('localidades')->joinWith('cereales');
+        $query = Acopios::find()->joinWith('localidades');
 
         // add conditions that should always apply here
 
@@ -59,13 +59,11 @@ class AcopiosSearch extends Acopios
         // grid filtering conditions
         $query->andFilterWhere([
             'id_aco' => $this->id_aco,
-            'lot_aco' => $this->lot_aco,
             'stock' => $this->stock,
         ]);
 
         $query->andFilterWhere(['like', 'nom_aco', $this->nom_aco]);
         $query->andFilterWhere(['like', 'localidades.nom_loc', $this->ubi_aco]);
-        $query->andFilterWhere(['like', 'cereales.nom_cer', $this->cer_aco]);
 
         return $dataProvider;
     }

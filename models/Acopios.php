@@ -30,10 +30,9 @@ class Acopios extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nom_aco', 'ubi_aco', 'cer_aco', 'lot_aco'], 'required'],
-            [['ubi_aco', 'cer_aco', 'lot_aco', 'stock'], 'integer'],
+            [['nom_aco', 'ubi_aco'], 'required'],
+            [['ubi_aco', 'stock'], 'integer'],
             [['nom_aco'], 'string', 'max' => 50],
-            [['cer_aco'], 'exist', 'skipOnError' => true, 'targetClass' => Cereales::className(), 'targetAttribute' => ['cer_aco' => 'id_cer']],
         ];
     }
 
@@ -46,8 +45,6 @@ class Acopios extends \yii\db\ActiveRecord
             'id_aco' => 'Id Aco',
             'nom_aco' => 'Nombre',
             'ubi_aco' => 'Ubicación',
-            'cer_aco' => 'Tipo de Cereal',
-            'lot_aco' => 'Lote',
             'stock' => 'Stock (qq)'
         ];
     }
@@ -66,8 +63,4 @@ class Acopios extends \yii\db\ActiveRecord
         return $this->hasOne(Localidades::className(), ['id_loc' => 'ubi_aco']);
     }
 
-    public function getcereales()
-    {
-        return $this->hasOne(Cereales::className(), ['id_cer' => 'cer_aco']);
-    }
 }

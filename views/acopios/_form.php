@@ -22,14 +22,6 @@ use app\models\Localidades;
             <?php $var = ArrayHelper::map(Localidades::find()->all(), 'id_loc', 'nom_loc'); ?>
             <?= $form->field($model, 'ubi_aco')->dropDownList($var, ['prompt' => ' - ']); ?>
         </div>
-        <div class="col-lg-4">
-            <?php $var = ArrayHelper::map(Cereales::find()->all(), 'id_cer', 'nom_cer'); ?>
-            <?= $form->field($model, 'cer_aco')->dropDownList($var, ['prompt' => ' - ', 'class' => 'form-control']); ?>
-        </div>
-
-        <div class="col-lg-4">
-            <?= $form->field($model, 'lot_aco')->textInput() ?>
-        </div>
 
         <?php if($model->isNewRecord): ?>
             <div class="col-lg-4">
