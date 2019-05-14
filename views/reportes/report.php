@@ -96,7 +96,7 @@
             <th style="text-align: center;"><?php echo number_format($totEnt, 2, ',', '.'); ?></th>
             <th></th>
             <th style="text-align: center;"><?php echo number_format($totSal, 2, ',', '.'); ?></th>
-            <th style="text-align: left;"><?php echo number_format($totEnt-$totSal, 2, ',', '.'); ?></th>
+            <th style="text-align: left;"><?php echo number_format(($totEnt-$totSal)+$mov[0]['stock'], 2, ',', '.'); ?></th>
             <th></th>
         </tr>
         </tfoot>
