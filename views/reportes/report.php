@@ -38,7 +38,7 @@
 </div>-->
 <div class="row" style="text-align: center">
     <hr>
-    <strong>Movimientos de cereales - Acopio: <?= $mov[0]['nom_aco']; ?></strong>
+    <strong>Movimientos de cereales - Acopio: <?= $mov[0]['nom_aco']; ?> - Saldo inicial: <?= $mov[0]['stock']  ?></strong>
 </div>
 <div class="row">
     <table>
@@ -96,7 +96,7 @@
             <th style="text-align: center;"><?php echo number_format($totEnt, 2, ',', '.'); ?></th>
             <th></th>
             <th style="text-align: center;"><?php echo number_format($totSal, 2, ',', '.'); ?></th>
-            <th style="text-align: left;"><?php echo number_format($totEnt+$totSal, 2, ',', '.'); ?></th>
+            <th style="text-align: left;"><?php echo number_format($totEnt-$totSal, 2, ',', '.'); ?></th>
             <th></th>
         </tr>
         </tfoot>
