@@ -30,8 +30,8 @@ class Acopios extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nom_aco', 'ubi_aco'], 'required'],
-            [['ubi_aco', 'stock'], 'integer'],
+            [['nom_aco', 'ubi_aco', 'stock_info'], 'required'],
+            [['ubi_aco', 'stock', 'stock_info'], 'integer'],
             [['nom_aco'], 'string', 'max' => 50],
         ];
     }
@@ -45,7 +45,8 @@ class Acopios extends \yii\db\ActiveRecord
             'id_aco' => 'Id Aco',
             'nom_aco' => 'Nombre',
             'ubi_aco' => 'Ubicación',
-            'stock' => 'Stock (qq)'
+            'stock' => 'Stock (qq)',
+            'stock_info' => 'Stock informe (qq)'
         ];
     }
 

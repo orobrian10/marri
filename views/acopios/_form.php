@@ -29,6 +29,10 @@ use app\models\Localidades;
             </div>
         <?php endif; ?>
 
+        <div class="col-lg-4">
+            <?= $form->field($model, 'stock_info')->textInput() ?>
+        </div>
+
     </div>
 
     <div class="col-lg-12 text-right">

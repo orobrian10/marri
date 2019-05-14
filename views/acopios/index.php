@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'localidades.nom_loc'
             ],
             'stock',
+            'stock_info',
             ['class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'view' => function () {

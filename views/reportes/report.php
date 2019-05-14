@@ -38,7 +38,7 @@
 </div>-->
 <div class="row" style="text-align: center">
     <hr>
-    <strong>Movimientos de cereales - Acopio: <?= $mov[0]['nom_aco']; ?> - Saldo inicial: <?= $mov[0]['stock']  ?></strong>
+    <strong>Movimientos de cereales - Acopio: <?= $mov[0]['nom_aco']; ?> - Saldo inicial: <?= $mov[0]['stock_info']  ?></strong>
 </div>
 <div class="row">
     <table>
