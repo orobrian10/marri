@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Movimientos;
+use app\models\Ventas;
 use Yii;
 use app\models\Cereales;
 use app\models\CerealesSearch;
@@ -116,7 +118,21 @@ class CerealesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $validate = Movimientos::find()->where('cer_mov = ' . $id)->count();
+        if ($validate > 0):
+            Yii::$app->session->setFlash('error', 'No se puede eliminar esta localidad porque está en uso');
+        else:
+            $validate = Ventas::find()->where('cer_ven = ' . $id)->count();
+            if ($validate > 0):
+                Yii::$app->session->setFlash('error', 'No se puede eliminar esta localidad porque está en uso');
+            else:
+                $cer = Cereales::findOne($id);
+                $res = $cer->delete();
+                if ($res):
+                    Yii::$app->session->setFlash('success', 'Eliminado correctamente');
+                endif;
+            endif;
+        endif;
 
         return $this->redirect(['index']);
     }

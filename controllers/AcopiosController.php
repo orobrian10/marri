@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\AcopiosLugares;
+use app\models\Movimientos;
 use Yii;
 use app\models\Acopios;
 use app\models\AcopiosSearch;
@@ -11,6 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\filters\AccessRule;
+
 /**
  * AcopiosController implements the CRUD actions for Acopios model.
  */
@@ -117,7 +119,17 @@ class AcopiosController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+
+        $validate = Movimientos::find()->where('des_mov = ' . $id)->count();
+        if ($validate > 0):
+            Yii::$app->session->setFlash('error', 'No se puede eliminar porque el acopio está en uso');
+        else:
+            $aco = Acopios::findOne($id);
+            $res = $aco->delete();
+            if ($res):
+                Yii::$app->session->setFlash('success', 'Eliminado correctamente');
+            endif;
+        endif;
 
         return $this->redirect(['index']);
     }

@@ -9,13 +9,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="localidades-index">
 
-    <?php if (Yii::$app->session->hasFlash('error')) { ?>
-        <div class="alert alert-danger">
-            <!-- flash message -->
-            <?= Yii::$app->session->getFlash('error'); ?>
-        </div>
-    <?php } ?>
-
     <?= $this->render('/common/_index', [
         'entity' => 'Localidades',
         'entitySing' => 'Localidad',

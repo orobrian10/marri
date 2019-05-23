@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Campos;
+use app\models\Movimientos;
 use Yii;
 use app\models\Localidades;
 use app\models\LocalidadesSearch;
@@ -118,7 +119,7 @@ class LocalidadesController extends Controller
     public function actionDelete($id)
     {
 
-        $validate = Campos::find()->where('loc_campos = ' . $id)->count();
+        $validate = Movimientos::find()->where('ori_mov = ' . $id)->count();
         if ($validate > 0):
             Yii::$app->session->setFlash('error', 'No se puede eliminar esta localidad porque está en uso');
         else:
